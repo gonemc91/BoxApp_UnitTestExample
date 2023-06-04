@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface AccountsRepository {
 
     /**
-     * Whether user signed-in or not.
+     * Whether user signed-in or not .
      */
 
     suspend fun isSignedIn(): Boolean
