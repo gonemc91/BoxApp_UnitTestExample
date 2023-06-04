@@ -1,5 +1,6 @@
 package com.example.nav_components_2_tabs_exercise.model.accounts
 
+import android.provider.ContactsContract.CommonDataKinds.Email
 import com.example.nav_components_2_tabs_exercise.model.accounts.entities.Account
 import com.example.nav_components_2_tabs_exercise.model.accounts.entities.SignUpData
 import kotlinx.coroutines.flow.Flow
@@ -19,8 +20,16 @@ interface AccountsRepository {
 
     /**
      * Try to sign-in with the email and password.
-     * @throws [EmptyFieldException], [PasswordMismatchException], [AccountAlredyExistsExeption]
+     * @throws [EmptyFieldException], [AuthExeption]
      */
+
+    suspend fun signIn(email: String, password: String)
+
+    /**
+     * Created a new account.
+     *  @throws [EmptyFieldException], [PasswordMismatchException], [AccountAlredyExistsExeption]
+     */
+
 
 
     suspend fun signUp(signUpData: SignUpData)
