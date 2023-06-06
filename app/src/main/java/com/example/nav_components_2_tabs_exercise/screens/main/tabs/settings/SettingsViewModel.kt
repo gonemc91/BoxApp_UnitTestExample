@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(
     private val boxesRepository: BoxesRepository
-): ViewModel() {
+): ViewModel(), SettingAdapter.Listener {
 
     private val _boxSettings = MutableLiveData<List<BoxSetting>>()
     val boxSettings = _boxSettings.share()
@@ -35,7 +35,13 @@ class SettingsViewModel(
         }
     }
 
+    override fun enableBox(box: Box) {
+        viewModelScope.launch { boxesRepository.activeBox(box) }
+    }
 
+    override fun disableBox(box: Box) {
+        viewModelScope.launch { boxesRepository.deactivateBox(box) }
+    }
 
 
 }
