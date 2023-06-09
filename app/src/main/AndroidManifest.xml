@@ -12,19 +12,18 @@
         android:theme="@style/Theme.NavComponents2tabsexercise"
         tools:targetApi="31">
 
-        <!-- TODO: Make sure that com.example.nav_components_2_tabs_exercise.SplashActivity has android:exported='true' attributes and
-                   contains intent-filter: MAIN/LAUNCHER -->
 
         <activity
-            android:name=".screens.main.MainActivity"
+            android:name=".SplashActivity"
             android:theme="@style/SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".screens.main.MainActivity"/>
 
 
     </application>
