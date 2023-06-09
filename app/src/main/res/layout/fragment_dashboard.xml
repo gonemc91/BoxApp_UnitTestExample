@@ -5,29 +5,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.main.tabs.dashboard.DashboardFragment"
-    >
+    tools:context=".screens.main.tabs.dashboard.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/boxesContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flowView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:flow_wrapMode="chain"
-        app:flow_horizontalStyle="packed"
-        app:flow_horizontalGap="@dimen/medium_space"
-        app:flow_verticalGap="@dimen/medium_space"
-        app:contraint_reference_ids = "greenBox, yellowBox" />
+        <!--This is an example, real items are derived from the mode: TODO-->
 
-    <!--This is an example, real items are derived from the mode: TODO-->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:flow_horizontalGap="@dimen/medium_space"
+            app:flow_horizontalStyle="packed"
+            app:flow_verticalGap="@dimen/medium_space"
+            app:flow_wrapMode="chain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:constraint_referenced_ids="greenBox,yellowBox"
+            />
+
+        <com.example.nav_components_2_tabs_exercise.views.DashboardItemView
+            android:id="@+id/greenBox"
+            style="@style/DefaultDashboardItemStyle"
+            app:color="#008800"
+            app:title="Green Box" />
+
+        <com.example.nav_components_2_tabs_exercise.views.DashboardItemView
+            android:id="@+id/yellowBox"
+            style="@style/DefaultDashboardItemStyle"
+            app:color="#888800"
+            app:title="Yellow Box" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

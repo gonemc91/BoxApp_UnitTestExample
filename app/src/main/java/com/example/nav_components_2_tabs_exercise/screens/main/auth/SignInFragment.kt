@@ -3,8 +3,8 @@ package com.example.nav_components_2_tabs_exercise.screens.main.auth
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.Repositories
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentSignInBinding
@@ -56,10 +56,10 @@ class SignInFragment: Fragment(R.layout.fragment_sign_in) {
         binding.passwordEditText.text?.clear()
     }
 
-    private fun observeNavigateToTabsEvent() = viewModel.navigateToTabEvent.observeEvent(viewLifecycleOwner){
-        //user has signed successfully
-        TODO("Replace SignInFragment by TabsFragment here")
-    }
+    private fun observeNavigateToTabsEvent() =
+        viewModel.navigateToTabEvent.observeEvent(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signInFragment_to_tabsFragment)
+        }
 
 
 
@@ -70,8 +70,9 @@ class SignInFragment: Fragment(R.layout.fragment_sign_in) {
         else{
             email
         }
-        // user want to create a new account
-        TODO("Launch SignUpFragment here and send emailArg to it")
+
+        val direction = SignInFragmentDirections.actionSignInFragmentToSignUpFragment(emailArg)
+        findNavController().navigate(direction)
 
     }
 

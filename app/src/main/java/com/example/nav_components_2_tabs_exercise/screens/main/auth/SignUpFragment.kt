@@ -5,6 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.Repositories
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentSignUpBinding
@@ -18,6 +21,8 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
     private lateinit var binding: FragmentSignUpBinding
 
     private val viewModel by viewModelCreator {  SignUpViewModel(Repositories.accountRepository)}
+
+    private val args by navArgs<SignUpFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,12 +75,12 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner){
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
     }
 
-    private fun getEmailArgument(): String{
-        TODO("Extract email value from arguments here")
-    }
+    private fun getEmailArgument(): String? =  args.emailArg
+
+
 
 
 }

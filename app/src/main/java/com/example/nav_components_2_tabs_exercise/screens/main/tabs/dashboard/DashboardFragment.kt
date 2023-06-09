@@ -58,4 +58,10 @@ class DashboardFragment: Fragment(R.layout.fragment_dashboard) {
     }
 
 
+    private val boxClickListener = View.OnClickListener {
+        val box = it.tag as Box
+
+    }
+
+
 }

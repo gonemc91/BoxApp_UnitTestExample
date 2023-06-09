@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         android:layout_marginTop="@dimen/large_space"
-        app:layout_constraintBottom_toBottomOf="@+id/settingsList"
+        app:layout_constraintBottom_toTopOf="@id/settingsList"
         android:text="@string/settings_description"/>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -2,7 +2,6 @@ package com.example.nav_components_2_tabs_exercise.screens.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
@@ -147,18 +146,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isSignedIn(): Boolean{
-        TODO("Extract isSignedIn flag from extras bundle here")
+        val bundle = intent.extras ?: throw IllegalStateException("No required arguments")
+        val args = MainActivityArgs.fromBundle(bundle)
+        return args.isSignedIn
     }
 
-    private fun getMainNavigationGraphId(): Int{
-        TODO("Please create a main navigation graph and return it's ID here")
-    }
-    private fun getTableDestination(): Int {
-        TODO("Please return the ID TabsFragment destination from main graph here")
-    }
-
-    private fun getSignInDestination(): Int{
-         TODO("Please return thr ID of SignInFragment destination from main graph here")
-    }
-
+    private fun getMainNavigationGraphId(): Int = R.id.main_graph
+    private fun getTableDestination(): Int  = R.id.tabsFragment
+    private fun getSignInDestination(): Int = R.id.signInButton
 }
