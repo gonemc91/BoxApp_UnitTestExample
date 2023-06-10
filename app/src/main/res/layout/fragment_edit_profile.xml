@@ -15,17 +15,15 @@
         <TextView
             android:id="@+id/screenTitleTextView"
             style="@style/TitleTextView"
-            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/userNameTextInput"
+            app:layout_constraintBottom_toTopOf="@id/usernameTextInput"
             app:layout_constraintVertical_chainStyle="packed"
-            android:text="@string/edit_profile_description"
-            />
+            android:text="@string/edit_profile_description"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userNameTextInput"
+            android:id="@+id/usernameTextInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/field_username"
@@ -33,18 +31,18 @@
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/screenTitleTextView"
-            app:layout_constraintBottom_toTopOf="@+id/saveButton"
-            >
-           <com.google.android.material.textfield.TextInputEditText
-               android:id="@+id/userNameEditText"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:lines="1"
-               android:inputType="text"
-               android:imeOptions="actionDone"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/screenTitleTextView"
+            app:layout_constraintBottom_toTopOf="@id/saveButton">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:inputType="text"
+                android:imeOptions="actionDone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/saveButton"
@@ -55,9 +53,8 @@
             android:layout_marginTop="@dimen/large_space"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userNameTextInput"
-            app:layout_constraintBottom_toTopOf="@+id/cancelButton"
-            />
+            app:layout_constraintTop_toBottomOf="@id/usernameTextInput"
+            app:layout_constraintBottom_toTopOf="@id/cancelButton"/>
 
         <Button
             android:id="@+id/cancelButton"
@@ -67,8 +64,8 @@
             android:text="@string/action_cancel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/saveButton"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/saveButton"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -79,9 +76,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cancelButton"/>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </ScrollView>

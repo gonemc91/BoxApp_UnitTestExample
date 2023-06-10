@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--This is an example, real items are derived from the mode: TODO-->
 
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flowView"

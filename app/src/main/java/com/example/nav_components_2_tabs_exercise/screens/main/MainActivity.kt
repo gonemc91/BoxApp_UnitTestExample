@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
         return args.isSignedIn
     }
 
-    private fun getMainNavigationGraphId(): Int = R.id.main_graph
+    private fun getMainNavigationGraphId(): Int = R.navigation.main_graph
     private fun getTableDestination(): Int  = R.id.tabsFragment
     private fun getSignInDestination(): Int = R.id.signInButton
 }

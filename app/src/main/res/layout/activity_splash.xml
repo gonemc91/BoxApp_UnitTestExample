@@ -8,8 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".SplashActivity">
 
-<!--TODO: Register nav graph for splash screen here.
-     Nav graph should contain SplashFragment-->
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/splashContainer"

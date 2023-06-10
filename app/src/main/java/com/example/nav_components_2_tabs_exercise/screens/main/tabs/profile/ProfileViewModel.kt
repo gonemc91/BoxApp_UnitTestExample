@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val accountRepository: AccountsRepository
 ) : ViewModel() {
+
     private val _account = MutableLiveData<Account>()
     val account = _account.share()
 

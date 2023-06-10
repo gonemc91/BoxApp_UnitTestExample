@@ -16,15 +16,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"/>
-
-
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        tools:layout="@layout/fragment_dashboard" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
-        app:menu="@menu/tabs_menu"
         android:layout_height="wrap_content"
+        app:menu="@menu/tabs_menu"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

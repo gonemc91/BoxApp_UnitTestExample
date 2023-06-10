@@ -15,22 +15,19 @@ import kotlinx.coroutines.launch
 
 class EditProfileViewModel(
     private val accountsRepository: AccountsRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _initialUsernameEvent = MutableLiveEvent<String>()
     val initialUsernameEvent = _initialUsernameEvent.share()
 
-
     private val _saveInProgress = MutableLiveData(false)
     val saveInProgress = _saveInProgress.share()
-
 
     private val _goBackEvent = MutableUnitLiveEvent()
     val goBackEvent = _goBackEvent.share()
 
     private val _showEmptyFieldErrorEvent = MutableUnitLiveEvent()
     val showEmptyFieldErrorEvent = _showEmptyFieldErrorEvent.share()
-
 
     init {
         viewModelScope.launch {
@@ -41,26 +38,26 @@ class EditProfileViewModel(
         }
     }
 
-    fun saveUsername(newUsername: String){
+    fun saveUsername(newUsername: String) {
         viewModelScope.launch {
             showProgress()
             try {
                 accountsRepository.updateAccountUsername(newUsername)
                 goBack()
-            }catch(e: EmptyFieldException) {
+            } catch (e: EmptyFieldException) {
                 hideProgress()
-                showEmptyFieldErrorEvent
+                showEmptyFieldErrorMessage()
             }
         }
     }
 
     private fun goBack() = _goBackEvent.publishEvent()
 
-    private fun showProgress(){
+    private fun showProgress() {
         _saveInProgress.value = true
     }
 
-    private fun hideProgress(){
+    private fun hideProgress() {
         _saveInProgress.value = false
     }
 
