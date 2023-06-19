@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nav_components_2_tabs_exercise.R
@@ -20,7 +19,7 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
 
     private lateinit var binding: FragmentSignUpBinding
 
-    private val viewModel by viewModelCreator {  SignUpViewModel(Repositories.accountRepository)}
+    private val viewModel by viewModelCreator {  SignUpViewModel(Repositories.accountsRepository)}
 
     private val args by navArgs<SignUpFragmentArgs>()
 
@@ -29,6 +28,13 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
         binding = FragmentSignUpBinding.bind(view)
         binding.createAccountButton.setOnClickListener { onCreateAccountButtonPressed() }
 
+        if (savedInstanceState == null && getEmailArgument() != null){
+            binding.emailEditText.setText(getEmailArgument())
+        }
+
+        observeState()
+        observeGoBackEvent()
+        observeShowSuccessSignUpMessageEvent()
     }
 
     private fun onCreateAccountButtonPressed() {
@@ -40,9 +46,6 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
         )
         viewModel.signUp(signUpData)
 
-        observeState()
-        observeGoBackEvent()
-        observeShowSuccessSignUpMessageEvent()
     }
 
     private fun observeState() = viewModel.state.observe(viewLifecycleOwner){state->
@@ -57,6 +60,8 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
         fillError(binding.usernameTextInput, state.usernameErrorMessageRes)
         fillError(binding.passwordTextInput, state.passwordErrorMessageRes)
         fillError(binding.repeatPasswordTextInput, state.repeatPasswordErrorMessageRes)
+
+        binding.progressBar.visibility = if(state.showProgress) View.VISIBLE else View.INVISIBLE
 
     }
 
@@ -79,8 +84,6 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun getEmailArgument(): String? =  args.emailArg
-
-
 
 
 }

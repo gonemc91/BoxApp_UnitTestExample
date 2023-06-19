@@ -22,7 +22,21 @@
             app:layout_constraintVertical_chainStyle="packed"
             android:text="@string/edit_profile_description"/>
 
-        <com.google.android.material.textfield.TextInputLayout
+
+        <EditText
+            android:id="@+id/usernameTextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/field_username"
+            android:layout_marginTop="@dimen/large_space"
+            android:lines="1"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/screenTitleTextView"
+            app:layout_constraintBottom_toTopOf="@id/saveButton"/>
+
+        <!--<com.google.android.material.textfield.TextInputLayout
             android:id="@+id/usernameTextInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +56,7 @@
                 android:inputType="text"
                 android:imeOptions="actionDone" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>-->
 
         <Button
             android:id="@+id/saveButton"

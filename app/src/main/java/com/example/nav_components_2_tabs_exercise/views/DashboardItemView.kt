@@ -80,7 +80,7 @@ class DashboardItemView(
         fun getBackgroundColor(color: Int): Int{
             val red = Color.red(color)
             val green = Color.green(color)
-            val blue = Color.green(color)
+            val blue = Color.blue(color)
             return Color.argb(64, red, green, blue)
         }
     }

@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.Repositories
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentEditProfileBinding
-import com.example.nav_components_2_tabs_exercise.utils.findTopNavController
 import com.example.nav_components_2_tabs_exercise.utils.observeEvent
 import com.example.nav_components_2_tabs_exercise.utils.viewModelCreator
 
@@ -17,7 +16,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
 
-    private val viewModel by viewModelCreator { EditProfileViewModel(Repositories.accountRepository) }
+    private val viewModel by viewModelCreator { EditProfileViewModel(Repositories.accountsRepository) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,7 +31,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun onSaveButtonPressed() {
-        viewModel.saveUsername(binding.usernameEditText.text.toString())
+        viewModel.saveUsername(binding.usernameTextInput.text.toString())
     }
 
     private fun observeSaveInProgress() = viewModel.saveInProgress.observe(viewLifecycleOwner) {
@@ -48,7 +47,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun listenInitialUsernameEvent() = viewModel.initialUsernameEvent.observeEvent(viewLifecycleOwner) { username ->
-        binding.usernameEditText.setText(username)
+        binding.usernameTextInput.setText(username)
     }
 
     private fun observeEmptyFieldErrorEvent() = viewModel.showEmptyFieldErrorEvent.observeEvent(viewLifecycleOwner) {

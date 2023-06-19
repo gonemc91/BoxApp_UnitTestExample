@@ -7,8 +7,8 @@ import com.example.nav_components_2_tabs_exercise.model.boxes.InMemoryBoxesRepos
 
 object Repositories {
 
-    val accountRepository: AccountsRepository = InMemoryAccountsRepository()
+    val accountsRepository: AccountsRepository = InMemoryAccountsRepository()
 
-    val boxesRepository: BoxesRepository = InMemoryBoxesRepository(accountRepository)
+    val boxesRepository: BoxesRepository = InMemoryBoxesRepository(accountsRepository)
 
 }

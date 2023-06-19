@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class SignInViewModel(
     private val accountsRepository: AccountsRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _state = MutableLiveData(State())
     val state = _state.share()
@@ -26,24 +26,22 @@ class SignInViewModel(
     private val _showAuthErrorToastEvent = MutableUnitLiveEvent()
     val showAuthToastEvent = _showAuthErrorToastEvent.share()
 
-
     private val _navigateToTabsEvent = MutableUnitLiveEvent()
-    val navigateToTabEvent = _navigateToTabsEvent.share()
+    val navigateToTabsEvent = _navigateToTabsEvent.share()
 
     fun signIn(email: String, password: String) = viewModelScope.launch {
         showProgress()
         try {
-            accountsRepository.signIn(email,password)
-            launchTabScreen()
-        } catch (e: EmptyFieldException){
+            accountsRepository.signIn(email, password)
+            launchTabsScreen()
+        } catch (e: EmptyFieldException) {
             processEmptyFieldException(e)
-        }catch (e: AuthException){
+        } catch (e: AuthException) {
             processAuthException()
         }
-
     }
 
-    private fun processEmptyFieldException(e: EmptyFieldException){
+    private fun processEmptyFieldException(e: EmptyFieldException) {
         _state.value = _state.requireValue().copy(
             emptyEmailError = e.field == Field.Email,
             emptyPasswordError = e.field == Field.Password,
@@ -51,17 +49,15 @@ class SignInViewModel(
         )
     }
 
-    private fun processAuthException(){
+    private fun processAuthException() {
         _state.value = _state.requireValue().copy(
             signInInProgress = false
         )
         clearPasswordField()
         showAuthErrorToast()
-
     }
 
-
-    private fun showProgress(){
+    private fun showProgress() {
         _state.value = State(signInInProgress = true)
     }
 
@@ -69,14 +65,14 @@ class SignInViewModel(
 
     private fun showAuthErrorToast() = _showAuthErrorToastEvent.publishEvent()
 
-    private  fun launchTabScreen() = _navigateToTabsEvent.publishEvent()
+    private fun launchTabsScreen() = _navigateToTabsEvent.publishEvent()
 
-}
-data class State(
-    val emptyEmailError: Boolean = false,
-    val emptyPasswordError: Boolean = false,
-    val signInInProgress: Boolean = false
-){
-    val showProgress: Boolean get() = signInInProgress
-    val enableViews: Boolean get() = !signInInProgress
+    data class State(
+        val emptyEmailError: Boolean = false,
+        val emptyPasswordError: Boolean = false,
+        val signInInProgress: Boolean = false
+    ) {
+        val showProgress: Boolean get() = signInInProgress
+        val enableViews: Boolean get() = !signInInProgress
+    }
 }

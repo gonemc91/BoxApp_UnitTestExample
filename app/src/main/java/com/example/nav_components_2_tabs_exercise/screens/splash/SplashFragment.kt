@@ -1,7 +1,6 @@
 package com.example.nav_components_2_tabs_exercise.screens.splash
 
 import android.content.Intent
-import android.os.Build.VERSION_CODES.S
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -16,7 +15,7 @@ import com.example.nav_components_2_tabs_exercise.utils.viewModelCreator
 class SplashFragment: Fragment(R.layout.fragment_splash) {
 
     private lateinit var binding: FragmentSplashBinding
-    private val viewModel by viewModelCreator { SplashViewModel(Repositories.accountRepository)}
+    private val viewModel by viewModelCreator { SplashViewModel(Repositories.accountsRepository)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
