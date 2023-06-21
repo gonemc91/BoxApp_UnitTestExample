@@ -5,6 +5,7 @@ package com.example.nav_components_2_tabs_exercise.model.accounts.entities
  */
 
 data class Account (
+    val id: Long,
     val userName: String,
     val email: String,
     val createdAt: Long = UNKNOWN_CREATED_AT

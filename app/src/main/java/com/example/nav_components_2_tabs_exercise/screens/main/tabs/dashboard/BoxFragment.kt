@@ -51,7 +51,7 @@ class BoxFragment: Fragment(R.layout.fragment_box) {
         }
 
 
-    private fun getBoxId(): Int = args.boxID
+    private fun getBoxId(): Long = args.boxID
 
     private fun getColorValue(): Int = args.boxColorValue
 
