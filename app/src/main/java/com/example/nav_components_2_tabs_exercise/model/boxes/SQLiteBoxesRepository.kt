@@ -2,9 +2,14 @@ package com.example.nav_components_2_tabs_exercise.model.boxes
 
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.Color
+import androidx.core.content.contentValuesOf
 import com.example.nav_components_2_tabs_exercise.model.AuthException
 import com.example.nav_components_2_tabs_exercise.model.accounts.AccountsRepository
 import com.example.nav_components_2_tabs_exercise.model.boxes.entities.Box
+import com.example.nav_components_2_tabs_exercise.model.sqlite.AppSQLiteContract
+import com.example.nav_components_2_tabs_exercise.model.sqlite.AppSQLiteContract.AccountsBoxesSettingsTable
+import com.example.nav_components_2_tabs_exercise.model.sqlite.AppSQLiteContract.BoxesTable
 import com.example.nav_components_2_tabs_exercise.model.sqlite.wrapSQLiteException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
@@ -52,36 +57,42 @@ class SQLiteBoxesRepository(
     }
 
 
-
-
-
     private fun parseBox(cursor: Cursor): Box{
-        TODO("#7 \n" +
-                "1) Get id, color name and color value from the cursor here \n" +
-                "2) Create a Box object")
+        return Box(
+            id = cursor.getLong(cursor.getColumnIndexOrThrow(BoxesTable.COLUMN_ID)),
+            colorName = cursor.getString(cursor.getColumnIndexOrThrow(BoxesTable.COLUMN_COLOR_NAME)),
+            colorValue = Color.parseColor(cursor.getString(cursor.getColumnIndexOrThrow(BoxesTable.COLUMN_COLOR_VALUE)))
 
+        )
     }
 
     private fun saveActiveFlag(accountId: Long, boxId: Long, isActive: Boolean){
-        TODO("#8 \n" +
-                "Insert or update isActive flag in the accounts_boxes_settings table here \n" +
+        db.insertWithOnConflict(
+            AccountsBoxesSettingsTable.TABLE_NAME,
+            null,
+            contentValuesOf(
+                AccountsBoxesSettingsTable.COLUMN_BOX_ID to boxId,
+                AccountsBoxesSettingsTable.COLUMN_ACCOUNT_ID to accountId,
+                AccountsBoxesSettingsTable.COLUMN_IS_ACTIVE to isActive
+            ),
+            SQLiteDatabase.CONFLICT_REPLACE
+        )
 
-                "Tip: use SQLiteDatabase.insertWithOnConflict method")
     }
 
-    private fun queryBoxes(onlyActive: Boolean, accountId: Long): Cursor{
-        if(onlyActive){
-            TODO("#10 \n" +
-                    "Return a cursor which selects only those rows from boxes table \n" +
-                    "which doesn't have setting in the accounts_boxes_settings table or which \n" +
-                    "have such setting and it's = 1 (true) \n" +
+    private fun queryBoxes(onlyActive: Boolean, accountId: Long): Cursor {
+        if (onlyActive) {
+            val sql = "SELECT ${BoxesTable.TABLE_NAME}.*" +
+                    "FROM ${BoxesTable.TABLE_NAME} " +
+                    "LEFT JOIN ${AccountsBoxesSettingsTable.TABLE_NAME}" +
+                    " ON ${AccountsBoxesSettingsTable.COLUMN_BOX_ID} = ${BoxesTable.COLUMN_ID} " +
+                    " AND ${AccountsBoxesSettingsTable.COLUMN_ACCOUNT_ID} = ?" +
+                    "WHERE ${AccountsBoxesSettingsTable.COLUMN_IS_ACTIVE} IS NULL" +
+                    " OR ${AccountsBoxesSettingsTable.COLUMN_IS_ACTIVE} = 1"
 
-                    "Tip: use rawQuery and LEFT JOIN to combine data from 2 tables")
-        }else{
-            TODO("#9 \n" +
-                    "Just return a cursor with selects all rows from boxes table")
+            return db.rawQuery(sql, arrayOf(accountId.toString()))
+        } else {
+            return db.rawQuery("SELECT * FROM ${BoxesTable.TABLE_NAME}", null)
         }
     }
-
-
 }

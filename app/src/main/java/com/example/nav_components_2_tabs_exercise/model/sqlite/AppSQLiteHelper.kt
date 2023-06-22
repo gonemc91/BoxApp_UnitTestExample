@@ -9,11 +9,11 @@ class AppSQLiteHelper (private val applicationContext: Context): SQLiteOpenHelpe
 
 
     override fun onCreate(dB: SQLiteDatabase) {
-        val sqL = applicationContext.assets.open("database.db").bufferedReader().use {
+        val sqL = applicationContext.assets.open("db_init.sql").bufferedReader().use {
             it.readText()
         }
         sqL.split(';')
-            .filter { it.isBlank() }
+            .filter { it.isNotBlank() }
             .forEach{
                dB.execSQL(it)
             }
@@ -22,13 +22,6 @@ class AppSQLiteHelper (private val applicationContext: Context): SQLiteOpenHelpe
     override fun onUpgrade(dB: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
     }
-//       2) implement onCreate method:
-    //          - open db_init.sql from assets
-    //          - split SQL instruction by ';' char
-    //          - filter empty SQL instructions
-    //          - execute each instruction by using SQLiteDatabase.execSQL() method
-    //       3) leave onUpgrade() method empty
-
 
 
 

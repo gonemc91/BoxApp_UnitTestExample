@@ -15,6 +15,7 @@ import com.example.nav_components_2_tabs_exercise.R
 class SplashActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Repositories.init(applicationContext)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
     }
