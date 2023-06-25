@@ -1,10 +1,11 @@
 package com.example.nav_components_2_tabs_exercise.screens.main.tabs.settings
 
 import androidx.recyclerview.widget.DiffUtil
+import com.example.nav_components_2_tabs_exercise.model.boxes.entities.BoxAndSettings
 
-class BoxSettingDiffCallback (
-    private val oldList: List<BoxSetting>,
-    private val newList: List<BoxSetting>
+class BoxSettingsDiffCallback (
+    private val oldList: List<BoxAndSettings>,
+    private val newList: List<BoxAndSettings>
         ): DiffUtil.Callback(){
 
 

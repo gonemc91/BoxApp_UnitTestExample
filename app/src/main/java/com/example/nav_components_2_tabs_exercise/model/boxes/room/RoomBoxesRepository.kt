@@ -1,0 +1,74 @@
+package com.example.nav_components_2_tabs_exercise.model.boxes.room
+
+import com.example.nav_components_2_tabs_exercise.model.AuthException
+import com.example.nav_components_2_tabs_exercise.model.accounts.AccountsRepository
+import com.example.nav_components_2_tabs_exercise.model.boxes.BoxesRepository
+import com.example.nav_components_2_tabs_exercise.model.boxes.entities.Box
+import com.example.nav_components_2_tabs_exercise.model.boxes.entities.BoxAndSettings
+import com.example.nav_components_2_tabs_exercise.model.boxes.room.entities.AccountBoxSettingDbEntity
+import com.example.nav_components_2_tabs_exercise.model.boxes.room.entities.SettingsTuple
+import com.example.nav_components_2_tabs_exercise.model.room.wrapSQLiteException
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withTimeoutOrNull
+
+class RoomBoxesRepository(
+    private val accountRepository: AccountsRepository,
+    private val boxesDao: BoxesDao,
+    private val ioDispatcher: CoroutineDispatcher
+): BoxesRepository {
+
+    override suspend fun getBoxesAndSettings(onlyActive: Boolean): Flow<List<BoxAndSettings>> {
+        return accountRepository.getAccount()
+            .flatMapLatest { account ->
+                if (account == null) return@flatMapLatest flowOf(emptyList())
+                queryBoxesAndSettings(account.id)
+            }
+            .mapLatest { boxAndSettings ->
+                if (onlyActive) {
+                    boxAndSettings.filter { it.isActive }
+                } else {
+                    boxAndSettings
+                }
+
+            }
+    }
+
+    override suspend fun activateBox(box: Box) = wrapSQLiteException(ioDispatcher) {
+       setActiveFlagForBox(box, true)
+    }
+
+    override suspend fun deactivateBox(box: Box) = wrapSQLiteException(ioDispatcher) {
+        setActiveFlagForBox(box, false)
+    }
+    // fetch boxes and settings from BoxesDao and map them to the " +
+    //"list of BoxAbdSettings instances")
+    private fun queryBoxesAndSettings(accountId: Long): Flow<List<BoxAndSettings>> {
+        return boxesDao.getBoxesAndSettings(accountId)
+            .map { entities ->
+                entities.map {
+                    val boxEntity = it.boxDbEntity
+                    val settingsEntity = it.settingDbEntity
+                    BoxAndSettings(
+                        box = boxEntity.toBox(),
+                        isActive = settingsEntity.settings.isActive
+                    )
+                }
+            }
+    }
+    private suspend fun setActiveFlagForBox(box: Box, isActive: Boolean){
+        val account = accountRepository.getAccount().first() ?: throw AuthException()
+        boxesDao.setActiveFlagForBox(
+           AccountBoxSettingDbEntity(
+               accountId = account.id,
+               boxId = box.id,
+               settings = SettingsTuple(isActive = isActive)
+           )
+        )
+
+        //            get the current account (throw AuthException if there is no logged-in user)
+        //           and then use BoxesDao to activate/deactivate the box for the current account
+    }
+
+
+}

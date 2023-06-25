@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nav_components_2_tabs_exercise.model.boxes.BoxesRepository
 import com.example.nav_components_2_tabs_exercise.model.boxes.entities.Box
+import com.example.nav_components_2_tabs_exercise.model.boxes.entities.BoxAndSettings
 import com.example.nav_components_2_tabs_exercise.utils.share
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,8 +20,8 @@ class DashboardViewModel(
 
     init {
         viewModelScope.launch {
-            boxesRepository.getBoxes(onlyActive = true).collect {
-                _boxes.value = it
+            boxesRepository.getBoxesAndSettings(onlyActive = true).collect {list->
+                _boxes.value = list.map{ it.box}
             }
         }
     }
