@@ -10,7 +10,10 @@ import com.example.nav_components_2_tabs_exercise.model.accounts.AccountsReposit
 import com.example.nav_components_2_tabs_exercise.model.accounts.entities.Account
 import com.example.nav_components_2_tabs_exercise.model.accounts.entities.SignUpData
 import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.AccountDbEntity
+import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.AccountFullData
 import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.AccountUpdateUsernameTuple
+import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.SettingsAndBoxTuple
+import com.example.nav_components_2_tabs_exercise.model.boxes.entities.BoxAndSettings
 import com.example.nav_components_2_tabs_exercise.model.room.wrapSQLiteException
 import com.example.nav_components_2_tabs_exercise.model.settings.AppSettings
 import com.example.nav_components_2_tabs_exercise.utils.AsyncLoader
@@ -85,6 +88,27 @@ class RoomAccountsRepository(
         currentAccountIdFlow.get().value = AccountId(accountId)
         return@wrapSQLiteException
     }
+
+    override suspend fun getAllData(): Flow<List<AccountFullData>> {
+        val account = getAccount().first()
+        if(account == null || !account.isAdmin()) throw AuthException()
+        return accountsDao.getAllData()
+            .map { accountsAndSettings->
+                accountsAndSettings.map {accountAndSettingsTuple ->  
+                    AccountFullData(
+                        account = accountAndSettingsTuple.accountDbEntity.toAccount(),
+                        boxesAndSettings = accountAndSettingsTuple.settings.map {SettingsAndBoxTuple->
+                            BoxAndSettings(
+                                box = SettingsAndBoxTuple.boxDbEntity.toBox(),
+                                isActive = SettingsAndBoxTuple.accountBoxSettingsDbEntity.settings.isActive
+                            )
+
+                        }
+                    )
+                }
+            }
+    }
+
 
     private suspend fun findAccountIdByEmailAndPassword(email: String, password: String): Long {
         val tuple = accountsDao.findByEmail(email) ?: throw AuthException()

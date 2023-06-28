@@ -16,7 +16,7 @@ import com.example.nav_components_2_tabs_exercise.model.boxes.room.entities.Sett
     value = "SELECT \n" +
             "  accounts.id as account_id, \n" +
             "  boxes.id as box_id,\n" +
-            "  ifnull(accounts_boxes_settings.is_active, 1) as is_active\n" +
+            "  if null(accounts_boxes_settings.is_active, 1) as is_active\n" +
             "FROM accounts\n" +
             "JOIN boxes\n" +
             "LEFT JOIN accounts_boxes_settings\n" +

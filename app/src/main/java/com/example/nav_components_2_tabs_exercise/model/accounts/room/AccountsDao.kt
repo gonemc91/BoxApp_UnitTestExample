@@ -1,12 +1,7 @@
 package com.example.nav_components_2_tabs_exercise.model.accounts.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
-import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.AccountDbEntity
-import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.AccountSignInTuple
-import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.AccountUpdateUsernameTuple
+import androidx.room.*
+import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.*
 import kotlinx.coroutines.flow.Flow
 
 
@@ -44,4 +39,11 @@ interface AccountsDao {
     fun getById(accountId: Long): Flow<AccountDbEntity?>
 
 
+    @Transaction
+    @Query("SELECT * FROM accounts WHERE accounts.id = :accountId")
+    fun getAccountAndEditedBoxes(accountId: Long): AccountAndEditBoxesTuple
+
+    @Transaction
+    @Query("SELECT * FROM accounts")
+    fun getAllData(): Flow<List<AccountAndAllSettingsTuple>>
 }

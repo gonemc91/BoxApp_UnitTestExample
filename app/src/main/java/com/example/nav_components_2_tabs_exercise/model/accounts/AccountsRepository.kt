@@ -4,6 +4,7 @@ import com.example.nav_components_2_tabs_exercise.model.accounts.entities.Accoun
 import com.example.nav_components_2_tabs_exercise.model.accounts.entities.SignUpData
 import kotlinx.coroutines.flow.Flow
 import com.example.nav_components_2_tabs_exercise.model.AppException.*
+import com.example.nav_components_2_tabs_exercise.model.accounts.room.entites.AccountFullData
 
 
 /**
@@ -54,6 +55,13 @@ import com.example.nav_components_2_tabs_exercise.model.AppException.*
      */
 
     suspend fun updateAccountUsername(newUserName: String)
+
+
+   /**
+    * Get all accounts with their boxes and settings.
+    * Only main user can do this. Otherwise [AuthException] is thrown.
+    */
+   suspend fun getAllData(): Flow<List<AccountFullData>>
 
 
 }

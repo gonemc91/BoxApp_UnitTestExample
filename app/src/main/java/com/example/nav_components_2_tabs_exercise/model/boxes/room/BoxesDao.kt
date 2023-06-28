@@ -1,10 +1,8 @@
 package com.example.nav_components_2_tabs_exercise.model.boxes.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.nav_components_2_tabs_exercise.model.boxes.room.entities.AccountBoxSettingDbEntity
+import com.example.nav_components_2_tabs_exercise.model.boxes.room.entities.BoxAndSettingsTuple
 import com.example.nav_components_2_tabs_exercise.model.boxes.room.entities.BoxDbEntity
 import com.example.nav_components_2_tabs_exercise.model.boxes.room.views.SettingWithEntitiesTuple
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +19,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BoxesDao {
 
+    @Transaction
     @Query("SELECT * FROM settings_view WHERE account_id = :accountId")
     fun getBoxesAndSettings(accountId: Long): Flow<List<SettingWithEntitiesTuple>>
 
