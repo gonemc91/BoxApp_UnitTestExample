@@ -2,7 +2,6 @@ package com.example.nav_components_2_tabs_exercise.screens.main.tabs.admin
 
 import android.text.Html
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,11 +9,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.ItemTreeElementBinding
-import com.example.nav_components_2_tabs_exercise.screens.main.tabs.settings.SettingsAdapter
 
-class AdminItemAdapter(
+class AdminItemsAdapter(
     private val listener: Listener
-): RecyclerView.Adapter<AdminItemAdapter.Holder>(), View.OnClickListener {
+): RecyclerView.Adapter<AdminItemsAdapter.Holder>(), View.OnClickListener {
 
     private var items: List<AdminTreeItem> = emptyList()
 
@@ -38,7 +36,7 @@ class AdminItemAdapter(
             attributesTextView.text = prepareAttributesText(item)
             expandCollapseIndicatorImageView.setImageResource(getExpansionIcon(item))
             adjustStartOffSet(item, attributesTextView)
-            holder.binding.root.isClickable = item.expansionStatus != ExpansionStatus.NOT_EXPANDED
+            holder.binding.root.isClickable = item.expansionStatus != ExpansionStatus.NOT_EXPANDABLE
         }
     }
 

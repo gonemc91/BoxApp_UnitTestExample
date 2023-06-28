@@ -4,7 +4,9 @@
     android:id="@+id/tabs_graph"
     app:startDestination="@id/dashboard">
 
+    <include app:graph="@navigation/admin"/>
     <include app:graph="@navigation/dashboard" />
     <include app:graph="@navigation/settings" />
     <include app:graph="@navigation/profile" />
+
 </navigation>

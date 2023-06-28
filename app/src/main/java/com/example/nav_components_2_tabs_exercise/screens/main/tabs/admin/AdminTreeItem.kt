@@ -3,7 +3,7 @@ package com.example.nav_components_2_tabs_exercise.screens.main.tabs.admin
 enum class ExpansionStatus{
     EXPANDED,
     COLLAPSED,
-    NOT_EXPANDED
+    NOT_EXPANDABLE
 }
 
 data class AdminTreeItem(
