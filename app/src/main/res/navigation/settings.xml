@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.nav_components_2_tabs_exercise.screens.main.tabs.settings.SettingsFragment"
+        android:name="com.example.http.app.screens.main.tabs.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>
