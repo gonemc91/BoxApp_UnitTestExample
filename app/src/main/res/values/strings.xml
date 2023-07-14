@@ -60,4 +60,7 @@
     <string name="setting_is_active">Is Active</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="connection_error">Connection error</string>
+    <string name="internal_error">Internal error</string>
+    <string name="auth_error">Auth error</string>
 </resources>

@@ -7,18 +7,18 @@ sealed class Result<T> {
      */
 
    fun <R> map(mapper: ((T)->R)? = null): Result<R>{
-       return when (this){
-           is Success<T>->{
-               if (mapper == null){
-                   throw java.lang.IllegalStateException("Can't map Success<T> result without mapper.")
-               }else{
-                   Success(mapper(this.value))
-               }
-           }
-           is Error<T>-> Error(this.error)
-           is Empty-> Empty()
-           is Pending -> Pending()
-       }
+        return when (this) {
+            is Success<T> -> {
+                if (mapper == null) {
+                    throw IllegalStateException("Can't map Success<T> result without mapper.")
+                } else {
+                    Success(mapper(this.value))
+                }
+            }
+            is Error<T> -> Error(this.error)
+            is Pending<T> -> Pending()
+            else -> Empty()
+        }
    }
 
     fun getValueOrNull(): T?{
