@@ -1,27 +1,37 @@
 package com.example.http.app.screens.main.tabs.dashboard
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.http.app.model.boxes.BoxesSource
+import com.example.http.app.Singletons
+import com.example.http.app.model.accounts.AccountsRepository
+import com.example.http.app.model.boxes.BoxesRepository
 import com.example.http.app.model.boxes.entities.Box
+import com.example.http.app.model.boxes.entities.BoxesFilter
+import com.example.http.app.screens.base.BaseViewModel
+import com.example.http.app.utils.logger.Logger
 import com.example.http.app.utils.share
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
-    private val boxesSource: BoxesSource
-) : ViewModel() {
+    private val boxesRepository: BoxesRepository = Singletons.boxesRepository,
+    accountsRepository: AccountsRepository = Singletons.accountsRepository,
+    logger: Logger
 
-    private val _boxes = MutableLiveData<List<Box>>()
+) : BaseViewModel(accountsRepository, logger) {
+
+    private val _boxes = MutableLiveData<Result<List<Box>>>()
     val boxes = _boxes.share()
 
 
     init {
         viewModelScope.launch {
-            boxesSource.getBoxesAndSettings(onlyActive = true).collect { list->
-                _boxes.value = list.map{ it.box}
+            boxesRepository.getBoxesAndSettings(BoxesFilter.ONLY_ACTIVE).collect { result ->
+                _boxes.value = result.map { list -> list.map { it.box } }
             }
         }
+    }
+    fun reload() = viewModelScope.launch {
+        boxesRepository.reload(BoxesFilter.ONLY_ACTIVE)
     }
 
 }

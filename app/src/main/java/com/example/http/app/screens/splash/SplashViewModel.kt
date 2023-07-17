@@ -2,6 +2,7 @@ package com.example.http.app.screens.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.http.app.model.accounts.AccountsRepository
 import com.example.http.app.model.accounts.AccountsSources
 import com.example.http.app.utils.MutableLiveEvent
 import com.example.http.app.utils.publishEvent
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
  */
 
 class SplashViewModel(
-    private val accountsSources: AccountsSources
+    private val accountsRepository: AccountsRepository
 ) : ViewModel() {
     private val _launchMainScreenEvent = MutableLiveEvent<Boolean>()
     val launchMainScreenEvent = _launchMainScreenEvent.share()
@@ -22,7 +23,7 @@ class SplashViewModel(
 
     init {
         viewModelScope.launch {
-            _launchMainScreenEvent.publishEvent(accountsSources.isSignedIn())
+            _launchMainScreenEvent.publishEvent(accountsRepository.isSignedIn())
         }
     }
 }

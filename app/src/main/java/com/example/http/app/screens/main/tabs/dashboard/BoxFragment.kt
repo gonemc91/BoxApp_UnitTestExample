@@ -2,20 +2,20 @@ package com.example.http.app.screens.main.tabs.dashboard
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.http.R
-import com.example.http.databinding.FragmentBoxBinding
+import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeEvent
-import com.example.http.app.utils.viewModelCreator
 import com.example.http.app.views.DashboardItemView
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.FragmentBoxBinding
 
-class BoxFragment: Fragment(R.layout.fragment_box) {
+class BoxFragment: BaseFragment(R.layout.fragment_box) {
 
     private lateinit var binding: FragmentBoxBinding
 
-    private val viewModel by viewModelCreator { BoxViewModel(getBoxId(), Repositories.boxesRepository) }
+    override val viewModel by viewModels<BoxViewModel> ()
 
     private val args by navArgs<BoxFragmentArgs>()
 

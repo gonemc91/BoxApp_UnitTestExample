@@ -2,29 +2,32 @@ package com.example.http.app.screens.main.auth
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.http.R
+import com.example.http.app.Singletons
 import com.example.http.app.model.AccountAlreadyExistsException
 import com.example.http.app.model.EmptyFieldException
 import com.example.http.app.model.Field
 import com.example.http.app.model.PasswordMismatchException
-import com.example.http.app.model.accounts.AccountsSources
+import com.example.http.app.model.accounts.AccountsRepository
 import com.example.http.app.model.accounts.entities.SignUpData
-import com.example.http.app.utils.MutableUnitLiveEvent
-import com.example.http.app.utils.publishEvent
-import com.example.http.app.utils.requireValue
-import com.example.http.app.utils.share
+import com.example.http.app.screens.base.BaseViewModel
+import com.example.http.app.utils.*
+import com.example.http.app.utils.logger.LogCatLogger
+import com.example.http.app.utils.logger.Logger
+import com.example.nav_components_2_tabs_exercise.R
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(
-    private val accountsSources: AccountsSources
-) : ViewModel(){
-    private val _showSuccessSignUpMessageEvent = MutableUnitLiveEvent()
-    val showSuccessSignUpMessageEvent = _showSuccessSignUpMessageEvent.share()
+    accountsRepository: AccountsRepository = Singletons.accountsRepository,
+    logger: Logger = LogCatLogger
+) : BaseViewModel(accountsRepository, logger) {
 
     private val _goBackEvent = MutableUnitLiveEvent()
     val goBackEvent = _goBackEvent.share()
+
+
+    private val _showToastEvent = MutableLiveEvent<Int>()
+    val showToastEvent = _showToastEvent.share()
 
 
     private val _state = MutableLiveData(State())
@@ -36,7 +39,7 @@ class SignUpViewModel(
             viewModelScope.launch {
                 showProgress()
                 try {
-                    accountsSources.signUp(signUpData)
+                    accountsRepository.signUp(signUpData)
                     showSuccessSignUpMessage()
                     goBack()
                 }catch (e: EmptyFieldException){
@@ -63,7 +66,6 @@ class SignUpViewModel(
                 .copy(usernameErrorMessageRes = R.string.field_is_empty)
             Field.Password -> state.requireValue()
                 .copy(passwordErrorMessageRes = R.string.field_is_empty)
-            else -> throw IllegalStateException("Unknown field")
         }
     }
 
@@ -84,7 +86,7 @@ class SignUpViewModel(
         _state.value = _state.requireValue().copy(signUpInProgress = false)
     }
 
-    private fun showSuccessSignUpMessage() = _showSuccessSignUpMessageEvent.publishEvent()
+    private fun showSuccessSignUpMessage() = _showToastEvent.publishEvent(R.string.sign_up_success)
 
 
     private fun goBack() = _goBackEvent.publishEvent()

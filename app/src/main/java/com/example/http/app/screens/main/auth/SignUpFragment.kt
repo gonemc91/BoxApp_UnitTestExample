@@ -4,21 +4,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.http.R
-import com.example.http.databinding.FragmentSignUpBinding
 import com.example.http.app.model.accounts.entities.SignUpData
+import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeEvent
-import com.example.http.app.utils.viewModelCreator
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.FragmentSignUpBinding
 import com.google.android.material.textfield.TextInputLayout
 
-class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
+class SignUpFragment: BaseFragment(R.layout.fragment_sign_up) {
 
     private lateinit var binding: FragmentSignUpBinding
 
-    private val viewModel by viewModelCreator {  SignUpViewModel(Repositories.accountsSources) }
+    override val viewModel by viewModels<SignUpViewModel>()
 
     private val args by navArgs<SignUpFragmentArgs>()
 
@@ -64,7 +64,7 @@ class SignUpFragment: Fragment(R.layout.fragment_sign_up) {
 
     }
 
-    private fun observeShowSuccessSignUpMessageEvent() = viewModel.showSuccessSignUpMessageEvent.observeEvent(viewLifecycleOwner){
+    private fun observeShowSuccessSignUpMessageEvent() = viewModel.showToastEvent.observeEvent(viewLifecycleOwner){
         Toast.makeText(requireContext(), R.string.sign_up_success, Toast.LENGTH_SHORT).show()
     }
 

@@ -3,17 +3,17 @@ package com.example.http.app.screens.main.tabs.dashboard
 import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.http.R
-import com.example.http.databinding.FragmentDashboardBinding
 import com.example.http.app.model.boxes.entities.Box
-import com.example.http.app.utils.viewModelCreator
+import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.views.DashboardItemView
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
+class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
 
-    private val viewModel by viewModelCreator { DashboardViewModel(Repositories.boxesRepository) }
+    override val viewModel by viewModels<DashboardViewModel>()
 
     private lateinit var binding: FragmentDashboardBinding
 
@@ -59,7 +59,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     }
 
     private fun clearBoxViews() {
-        binding.boxesContainer.removeViews(1, binding.root.childCount - 1)
+        if (binding.boxesContainer.childCount > 1)
+        binding.boxesContainer.removeViews(1, binding.boxesContainer.childCount - 1)
     }
 
     private val boxClickListener = View.OnClickListener {

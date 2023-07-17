@@ -4,17 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.example.http.R
-import com.example.http.databinding.FragmentSplashBinding
+import androidx.fragment.app.viewModels
 import com.example.http.app.screens.main.MainActivity
-import com.example.http.screens.main.MainActivityArgs
+import com.example.http.app.screens.main.MainActivityArgs
 import com.example.http.app.utils.observeEvent
-import com.example.http.app.utils.viewModelCreator
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.FragmentSplashBinding
 
 class SplashFragment: Fragment(R.layout.fragment_splash) {
 
     private lateinit var binding: FragmentSplashBinding
-    private val viewModel by viewModelCreator { SplashViewModel(Repositories.accountsSources) }
+    private val viewModel by viewModels<SplashViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

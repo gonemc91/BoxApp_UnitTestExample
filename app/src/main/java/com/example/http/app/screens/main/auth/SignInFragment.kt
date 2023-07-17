@@ -3,18 +3,18 @@ package com.example.http.app.screens.main.auth
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.http.R
-import com.example.http.databinding.FragmentSignInBinding
+import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeEvent
-import com.example.http.app.utils.viewModelCreator
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.FragmentSignInBinding
 
-class SignInFragment : Fragment(R.layout.fragment_sign_in) {
+class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private lateinit var binding: FragmentSignInBinding
 
-    private val viewModel by viewModelCreator { SignInViewModel(Repositories.accountsSources) }
+    override val viewModel by viewModels<SignInViewModel> ()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

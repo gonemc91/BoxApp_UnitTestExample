@@ -15,7 +15,7 @@ import com.example.nav_components_2_tabs_exercise.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class BaseViewModel(
+open class BaseViewModel(
     val accountsRepository: AccountsRepository,
     val logger: Logger
 ) : ViewModel() {

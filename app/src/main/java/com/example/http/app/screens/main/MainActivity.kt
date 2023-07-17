@@ -1,18 +1,19 @@
 package com.example.http.app.screens.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.example.http.R
-import com.example.http.databinding.ActivityMainBinding
+import com.example.http.app.Singletons
 import com.example.http.app.screens.main.tabs.TabsFragment
-import com.example.http.app.utils.viewModelCreator
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.ActivityMainBinding
 import java.util.regex.Pattern
 
 /**
@@ -22,7 +23,7 @@ import java.util.regex.Pattern
 class MainActivity : AppCompatActivity() {
 
     //view-model is used observing username to be displayed in the toolbar
-    private val viewModel by viewModelCreator { MainActivityViewModel(Repositories.accountsSources) }
+    private val viewModel by viewModels<MainActivityViewModel> ()
 
     // nav controller of the current screen
     private var navController: NavController? = null
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Repositories.init(applicationContext)
+        Singletons.init(applicationContext)
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater).also {setContentView(it.root)}
         setSupportActionBar(binding.toolbar)

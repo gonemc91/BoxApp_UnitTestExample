@@ -1,18 +1,17 @@
 package com.example.http.app.model.accounts
 
-import android.text.BoringLayout
+import com.example.http.app.Result
 import com.example.http.app.model.*
 import com.example.http.app.model.accounts.entities.Account
 import com.example.http.app.model.accounts.entities.SignUpData
 import com.example.http.app.model.settings.AppSettings
-import java.util.concurrent.Flow
+import com.example.http.app.utils.async.LazyFlowSubject
+import kotlinx.coroutines.flow.Flow
 
 class AccountsRepository(
     private val accountSource: AccountsSources,
     private val appSettings: AppSettings
 ) {
-
-
     private val accountLazyFlowSubject = LazyFlowSubject<Unit, Account>{
         doGetAccount()
     }
@@ -38,7 +37,6 @@ class AccountsRepository(
         if (email.isBlank()) throw EmptyFieldException(Field.Email)
         if (password.isBlank()) throw  EmptyFieldException(Field.Password)
 
-
         val token = try{
             accountSource.signIn(email, password)
         }catch (e: Exception){
@@ -52,7 +50,7 @@ class AccountsRepository(
         // success! got auth token -> save it
         appSettings.setCurrentToken(token)
         // and load account data
-        accountLazyFlowSubject.updateAllVallues(accountSource.getAccount())
+        accountLazyFlowSubject.updateAllValues(accountSource.getAccount())
     }
 
     /**
@@ -89,7 +87,7 @@ class AccountsRepository(
      * If user is not logged-in an empty result is emitted.
      * @return infinite flow, always succes; errors are wrapped to [Result]
      */
-    fun getAccount(): Flow<Result<Account>>{
+    fun getAccount(): Flow<Result<Account>> {
         return accountLazyFlowSubject.listen(Unit)
     }
 
@@ -108,7 +106,7 @@ class AccountsRepository(
     suspend fun updateAccountUsername(newUsername: String) = wrapBackendExceptions {
         if (newUsername.isBlank()) throw EmptyFieldException(Field.Username)
         accountSource.setUsername(newUsername)
-        accountLazyFlowSubject.updateAllValues(accountsSource.getAccount())
+        accountLazyFlowSubject.updateAllValues(accountSource.getAccount())
     }
 
     /**

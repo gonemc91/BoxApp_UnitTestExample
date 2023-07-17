@@ -1,21 +1,25 @@
 package com.example.http.app.screens.main.auth
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.http.app.Singletons
 import com.example.http.app.model.AuthException
 import com.example.http.app.model.EmptyFieldException
 import com.example.http.app.model.Field
-import com.example.http.app.model.accounts.AccountsSources
+import com.example.http.app.model.accounts.AccountsRepository
+import com.example.http.app.screens.base.BaseViewModel
 import com.example.http.app.utils.MutableUnitLiveEvent
+import com.example.http.app.utils.logger.LogCatLogger
+import com.example.http.app.utils.logger.Logger
 import com.example.http.app.utils.publishEvent
 import com.example.http.app.utils.requireValue
 import com.example.http.app.utils.share
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
-    private val accountsSources: AccountsSources
-) : ViewModel() {
+    accountsRepository: AccountsRepository = Singletons.accountsRepository,
+    logger: Logger = LogCatLogger
+) : BaseViewModel(accountsRepository,logger) {
 
     private val _state = MutableLiveData(State())
     val state = _state.share()
@@ -32,12 +36,14 @@ class SignInViewModel(
     fun signIn(email: String, password: String) = viewModelScope.launch {
         showProgress()
         try {
-            accountsSources.signIn(email, password)
+            accountsRepository.signIn(email, password)
             launchTabsScreen()
         } catch (e: EmptyFieldException) {
             processEmptyFieldException(e)
         } catch (e: AuthException) {
             processAuthException()
+        }finally {
+            hideProgress()
         }
     }
 
@@ -59,6 +65,10 @@ class SignInViewModel(
 
     private fun showProgress() {
         _state.value = State(signInInProgress = true)
+    }
+
+    private fun hideProgress(){
+        _state.value = _state.requireValue().copy(signInInProgress = false)
     }
 
     private fun clearPasswordField() = _clearPasswordEvent.publishEvent()

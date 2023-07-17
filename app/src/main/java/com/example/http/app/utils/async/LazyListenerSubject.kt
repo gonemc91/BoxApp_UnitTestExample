@@ -13,7 +13,7 @@ typealias ValueListener<T> = (Result<T>) -> Unit
  * When at latest one listener is added via [addListener] call, a [loader] is
  * executed and the status of its executions is propagated to the listeners. Adding
  * other listeners with the same arguments doesn't trigger a new load but the existing
- * one is reused. Also the loading is cancelled and resources freed when the last listenr
+ * one is reused. Also the loading is cancelled and resources freed when the last listener
  * for the specified arguments is removed by calling [removeListener]
  */
 
@@ -30,8 +30,8 @@ class LazyListenerSubject<A : Any, T : Any>(
     private val futures = mutableMapOf<A, FutureRecord<T>>()
 
     /**
-     * Add new listener which receive a value produced by [laoder] withe the
-     * specified arguments. Value is produced and cashed by the [laoder] when the
+     * Add new listener which receive a value produced by [loader] withe the
+     * specified arguments. Value is produced and cashed by the [loader] when the
      * first listener with the specified arguments has been added. All further listeners
      * will reuse the same cached value without triggering a [loader]
      */
