@@ -2,30 +2,29 @@ package com.example.http.app.screens.main.tabs.settings
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.http.R
-import com.example.http.databinding.FragmentSettingsBinding
-import com.example.http.app.utils.observeEvent
-import com.example.http.app.utils.viewModelCreator
+import com.example.http.app.screens.base.BaseFragment
+import com.example.http.app.utils.observeResults
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.FragmentSettingsBinding
 
-class SettingsFragment: Fragment(R.layout.fragment_settings) {
+class SettingsFragment: BaseFragment(R.layout.fragment_settings) {
 
     private lateinit var binding: FragmentSettingsBinding
 
-    private val viewModel by viewModelCreator { SettingsViewModel(Repositories.boxesRepository) }
+    override val viewModel by viewModels<SettingsViewModel>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
 
-        val adapter = setupList()
-        viewModel.boxSettings.observe(viewLifecycleOwner) { adapter.renderSettings(it) }
 
-        viewModel.showErrorMessageEvent.observeEvent(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        binding.resultView.setTryAgainAction { viewModel.tryAgain() }
+        val adapter = setupList()
+        viewModel.boxSettings.observeResults(this, view, binding.resultView) {
+            adapter.renderSettings(it)
         }
     }
 

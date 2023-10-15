@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.http.R
 import com.example.http.app.model.boxes.entities.Box
 import com.example.http.app.model.boxes.entities.BoxAndSettings
+import com.example.nav_components_2_tabs_exercise.R
 
 class SettingsAdapter(
     private val listener: Listener

@@ -1,25 +1,24 @@
 package com.example.http.app.screens.main.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.http.app.model.accounts.AccountsSources
+import com.example.http.app.Singletons
+import com.example.http.app.model.accounts.AccountsRepository
 import com.example.http.app.model.accounts.entities.Account
-import com.example.http.app.utils.MutableLiveEvent
-import com.example.http.app.utils.publishEvent
+import com.example.http.app.screens.base.BaseViewModel
+import com.example.http.app.utils.logger.LogCatLogger
+import com.example.http.app.utils.logger.Logger
 import com.example.http.app.utils.share
 import kotlinx.coroutines.launch
+import com.example.http.app.Result
 
 class ProfileViewModel(
-    private val accountRepository: AccountsSources
-) : ViewModel() {
+  accountRepository: AccountsRepository = Singletons.accountsRepository,
+  logger: Logger = LogCatLogger
+) : BaseViewModel(accountRepository, logger) {
 
-    private val _account = MutableLiveData<Account>()
+    private val _account = MutableLiveData<Result<Account>>()
     val account = _account.share()
-
-
-    private val _restartFromLoginEvent = MutableLiveEvent<Unit>()
-    val restartWithSignInEvent = _restartFromLoginEvent.share()
 
 
     init {
@@ -30,16 +29,10 @@ class ProfileViewModel(
         }
     }
 
-    fun logout() {
-        viewModelScope.launch {
-            accountRepository.logout()
-            restartAppFromLoginScreen()
+    fun reload() {
+        accountsRepository.reloadAccount()
         }
     }
 
-    private fun restartAppFromLoginScreen() {
-        _restartFromLoginEvent.publishEvent()
-    }
 
 
-}

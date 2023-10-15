@@ -9,9 +9,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import com.example.http.R
-import com.example.http.databinding.PartDashboardItemBinding
 import com.example.http.app.model.boxes.entities.Box
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.PartDashboardItemBinding
 
 class DashboardItemView(
     context: Context,

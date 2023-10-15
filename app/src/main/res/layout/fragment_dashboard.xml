@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.main.tabs.dashboard.DashboardFragment">
+    tools:context="com.example.http.app.screens.main.tabs.dashboard.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/boxesContainer"
@@ -52,5 +52,11 @@
         android:textSize="16sp"
         android:text="@string/no_boxes"
         android:visibility="gone"/>
+
+    <com.example.http.app.views.ResultView
+        android:id="@+id/resultView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
 </FrameLayout>

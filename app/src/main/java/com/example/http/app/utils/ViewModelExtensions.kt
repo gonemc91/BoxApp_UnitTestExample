@@ -13,23 +13,19 @@ import com.example.http.app.Success
 import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.views.ResultView
 
-fun <T> LiveData<T>.requireValue(): T{
-    return this.value ?: throw java.lang.IllegalStateException("Value is empty")
+fun <T> LiveData<T>.requireValue(): T {
+    return this.value ?: throw IllegalStateException("Value is empty")
 }
 
-
-fun <T> LiveData<Result<T>>.observeResults(
-    fragment: BaseFragment,
-    root: View,
-    resultView: ResultView,
-    onSuccess: (T) -> Unit){
-    observe(fragment.viewLifecycleOwner){result->
+fun <T> LiveData<Result<T>>.observeResults(fragment: BaseFragment, root: View, resultView: ResultView, onSuccess: (T) -> Unit) {
+    observe(fragment.viewLifecycleOwner) { result ->
         resultView.setResult(fragment, result)
         val rootView: View = if (root is ScrollView)
             root.getChildAt(0)
         else
             root
-        if (rootView is ViewGroup && rootView !is RecyclerView && rootView !is AbsListView) {
+
+        if (rootView is ViewGroup && rootView !is RecyclerView && root !is AbsListView) {
             rootView.children
                 .filter { it != resultView }
                 .forEach {
@@ -37,7 +33,6 @@ fun <T> LiveData<Result<T>>.observeResults(
                 }
         }
         if (result is Success) onSuccess.invoke(result.value)
-
     }
 }
 

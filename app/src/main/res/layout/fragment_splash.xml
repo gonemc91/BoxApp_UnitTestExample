@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="bottom|center_horizontal"
     tools:background="@drawable/splash"
-    tools:context=".screens.splash.SplashFragment">
+    tools:context="com.example.http.app.SplashActivity">
 
     <ProgressBar
         android:id="@+id/loadingIndicator"

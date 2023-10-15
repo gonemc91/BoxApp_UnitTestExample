@@ -8,20 +8,21 @@ import com.example.http.app.model.boxes.BoxesRepository
 import com.example.http.app.model.boxes.entities.Box
 import com.example.http.app.model.boxes.entities.BoxesFilter
 import com.example.http.app.screens.base.BaseViewModel
+import com.example.http.app.utils.logger.LogCatLogger
 import com.example.http.app.utils.logger.Logger
 import com.example.http.app.utils.share
 import kotlinx.coroutines.launch
+import com.example.http.app.Result
+
 
 class DashboardViewModel(
     private val boxesRepository: BoxesRepository = Singletons.boxesRepository,
     accountsRepository: AccountsRepository = Singletons.accountsRepository,
-    logger: Logger
-
+    logger: Logger = LogCatLogger
 ) : BaseViewModel(accountsRepository, logger) {
 
     private val _boxes = MutableLiveData<Result<List<Box>>>()
     val boxes = _boxes.share()
-
 
     init {
         viewModelScope.launch {
@@ -30,6 +31,7 @@ class DashboardViewModel(
             }
         }
     }
+
     fun reload() = viewModelScope.launch {
         boxesRepository.reload(BoxesFilter.ONLY_ACTIVE)
     }

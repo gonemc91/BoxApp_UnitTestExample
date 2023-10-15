@@ -3,19 +3,19 @@ package com.example.http.app.screens.main.tabs.profile
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.http.R
-import com.example.http.databinding.FragmentEditProfileBinding
+import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeEvent
-import com.example.http.app.utils.viewModelCreator
+import com.example.nav_components_2_tabs_exercise.R
+import com.example.nav_components_2_tabs_exercise.databinding.FragmentEditProfileBinding
 
 
-class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
+class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
 
-    private val viewModel by viewModelCreator { EditProfileViewModel(Repositories.accountsSources) }
+    override val viewModel by viewModels <EditProfileViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,8 +49,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding.usernameTextInput.setText(username)
     }
 
-    private fun observeEmptyFieldErrorEvent() = viewModel.showEmptyFieldErrorEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.field_is_empty, Toast.LENGTH_SHORT).show()
+    private fun observeEmptyFieldErrorEvent() = viewModel.showErrorEvent.observeEvent(viewLifecycleOwner) {
+        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
     }
 
     private fun onCancelButtonPressed() {

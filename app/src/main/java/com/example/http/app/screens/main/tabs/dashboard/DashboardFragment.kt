@@ -10,6 +10,7 @@ import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.views.DashboardItemView
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentDashboardBinding
+import com.example.http.app.utils.observeResults
 
 class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
 
@@ -23,7 +24,10 @@ class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
 
         clearBoxViews()
 
-        viewModel.boxes.observe(viewLifecycleOwner) { renderBoxes(it) }
+        binding.resultView.setTryAgainAction { viewModel.reload() }
+        viewModel.boxes.observeResults(this, view, binding.resultView) {
+            renderBoxes(it)
+        }
     }
 
     private fun renderBoxes(boxes: List<Box>) {
@@ -59,8 +63,9 @@ class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
     }
 
     private fun clearBoxViews() {
-        if (binding.boxesContainer.childCount > 1)
-        binding.boxesContainer.removeViews(1, binding.boxesContainer.childCount - 1)
+        if (binding.boxesContainer.childCount > 1) {
+            binding.boxesContainer.removeViews(1, binding.boxesContainer.childCount - 1)
+        }
     }
 
     private val boxClickListener = View.OnClickListener {

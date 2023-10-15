@@ -1,23 +1,7 @@
 package com.example.http.app.screens.main.tabs.admin
 
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.http.R
-import com.example.http.app.Repositories.accountsSources
-import com.example.http.app.model.accounts.AccountsSources
-import com.example.http.app.model.accounts.entities.Account
-import com.example.http.app.model.accounts.room.entites.AccountFullData
-import com.example.http.app.model.boxes.entities.Box
-import com.example.http.app.model.boxes.entities.BoxAndSettings
-import com.example.http.app.screens.main.tabs.admin.ExpansionStatus.*
-import com.example.http.app.utils.resources.Resources
-import com.example.http.app.utils.share
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.launch
-
+/*
 class AdminViewModel(
     private val accountRepository: AccountsSources,
     private val resources: Resources,
@@ -56,10 +40,12 @@ class AdminViewModel(
 
 
 
-    /**
+    */
+/**
      * If item is collapsed -> expand it.
      * If item is expanded -> collapse it.
-     */
+     *//*
+
     override fun onItemToggled(item: AdminTreeItem) {
         if (item.expansionStatus == NOT_EXPANDABLE) return
 
@@ -72,9 +58,11 @@ class AdminViewModel(
     }
 
 
-    /**
+    */
+/**
      * Building a real data tree nodes.
-     */
+     *//*
+
     private fun toNode(accountsDataList: List<AccountFullData>, expandedIdentifiers: Set<Long>): Node {
         val rootExpansion = getExpansionStatus(getRootId(), accountsDataList.isNotEmpty(), expandedIdentifiers)
         return Node(
@@ -109,19 +97,23 @@ class AdminViewModel(
     }
 
 
-    /**
+    */
+/**
      * Recyclerview with DiffUtil are not intended to work with three-based structures
      * so let's convert the tree starting from the root node into a simple flat list.
-     */
+     *//*
+
     private fun flatNodes(root: Node): List<AdminTreeItem>{
         val items = mutableListOf<AdminTreeItem>()
         val level = 0
         doFlatNodes(root, level, items)
         return items
     }
-    /**
+    */
+/**
      * Helper recursive method for the previous one.
-     */
+     *//*
+
 
     private fun doFlatNodes(node: Node, level: Int, items: MutableList<AdminTreeItem>){
         val item = AdminTreeItem(
@@ -213,4 +205,4 @@ class AdminViewModel(
     }
 
 
-}
+}*/

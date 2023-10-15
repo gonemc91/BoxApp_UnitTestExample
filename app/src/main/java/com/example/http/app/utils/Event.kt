@@ -28,13 +28,14 @@ fun <T> MutableLiveEvent<T>.publishEvent(value: T){
     this.value = Event(value)
 }
 
-fun <T> LiveEvent<T>.observeEvent(lifecycleOwner: LifecycleOwner, listener: EventListener<T>){
-    this.observe(lifecycleOwner){
-        it?.get()?.let{value->
+fun <T> LiveEvent<T>.observeEvent(lifecycleOwner: LifecycleOwner, listener: EventListener<T>) {
+    this.observe(lifecycleOwner) {
+        it?.get()?.let { value ->
             listener(value)
         }
     }
 }
+
 
 // --- unit events:
 

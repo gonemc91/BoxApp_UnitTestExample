@@ -18,7 +18,7 @@ object Singletons {
         SourcesProvideHolder.sourcesProvider
     }
 
-    val appSetings: AppSettings by lazy {
+    val appSettings: AppSettings by lazy {
         SharedPreferencesAppSettings(appContext)
     }
 
@@ -37,7 +37,7 @@ object Singletons {
     val accountsRepository: AccountsRepository by lazy {
         AccountsRepository(
             accountSource = accountSource,
-            appSettings = appSetings
+            appSettings = appSettings
         )
     }
 

@@ -3,10 +3,9 @@ package com.example.http.app
 sealed class Result<T> {
 
     /**
-     * Convert Result<T> into Result<R>
+     * Convert Result<T> into Result<R>.
      */
-
-   fun <R> map(mapper: ((T)->R)? = null): Result<R>{
+    fun <R> map(mapper: ((T) -> R)? = null): Result<R> {
         return when (this) {
             is Success<T> -> {
                 if (mapper == null) {
@@ -19,15 +18,14 @@ sealed class Result<T> {
             is Pending<T> -> Pending()
             else -> Empty()
         }
-   }
+    }
 
-    fun getValueOrNull(): T?{
+    fun getValueOrNull(): T? {
         if (this is Success<T>) return this.value
         return null
     }
 
     fun isFinished() = this is Success<T> || this is Error<T>
-
 }
 
 class Success<T>(
@@ -36,8 +34,8 @@ class Success<T>(
 
 class Error<T>(
     val error: Throwable
-): Result<T>()
+) : Result<T>()
 
 class Empty<T> : Result<T>()
 
-class Pending<T>: Result<T>()
+class Pending<T> : Result<T>()

@@ -1,14 +1,5 @@
 package com.example.http.app.screens.main.tabs.admin
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.http.R
-import com.example.http.databinding.FragmentAdminTreeBinding
-import com.example.http.app.utils.resources.ContextResources
-import com.example.http.app.utils.viewModelCreator
-
 /**
  * Contains only RecycleView which displays they whole tree od data from the database
  * starting from accounts and ending with box settings.
@@ -16,6 +7,7 @@ import com.example.http.app.utils.viewModelCreator
 
 
 
+/*
 class AdminFragment : Fragment(R.layout.fragment_admin_tree) {
 
 
@@ -48,4 +40,4 @@ class AdminFragment : Fragment(R.layout.fragment_admin_tree) {
         }
     }
 
-}
+}*/

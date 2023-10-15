@@ -1,15 +1,6 @@
 package com.example.http.app.screens.main.tabs.admin
 
-import android.text.Html
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.example.http.R
-import com.example.http.databinding.ItemTreeElementBinding
-
+/*
 class AdminItemsAdapter(
     private val listener: Listener
 ): RecyclerView.Adapter<AdminItemsAdapter.Holder>(), View.OnClickListener {
@@ -84,13 +75,15 @@ class AdminItemsAdapter(
 
 
     interface Listener{
-    /**
+    */
+/**
      * Called when user toggles the specified items.
-     */
+     *//*
+
 
     fun onItemToggled(item: AdminTreeItem)
 
 }
 
 class Holder(val binding: ItemTreeElementBinding) : RecyclerView.ViewHolder(binding.root)
-}
+}*/

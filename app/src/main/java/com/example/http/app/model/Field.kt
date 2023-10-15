@@ -6,8 +6,3 @@ enum class Field {
     Password
 }
 
-enum class Field {
-    Email,
-    Username,
-    Password
-}

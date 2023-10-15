@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id = "@+id/adminThreeRecycleView"
     tools:listitem="@layout/item_tree_element"
-    tools:context=".screens.main.tabs.admin.AdminFragment"
+    tools:context="com.example.http.app.screens.main.tabs.admin.AdminFragment"
     >
 
 </androidx.recyclerview.widget.RecyclerView>
