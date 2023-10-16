@@ -8,14 +8,13 @@ import com.example.http.app.model.boxes.BoxesRepository
 import com.example.http.app.model.boxes.BoxesSource
 import com.example.http.app.model.settings.AppSettings
 import com.example.http.app.model.settings.SharedPreferencesAppSettings
-import com.example.http.sources.SourcesProvideHolder
 
 object Singletons {
 
     private lateinit var appContext: Context
 
     private val sourceProvider: SourcesProvider by lazy{
-        SourcesProvideHolder.sourcesProvider
+    TODO()
     }
 
     val appSettings: AppSettings by lazy {
