@@ -7,7 +7,13 @@ import okio.IOException
 import retrofit2.HttpException
 import retrofit2.Retrofit
 
-class BaseRetrofitSource(
+
+
+
+// todo #4: add property for accessing Retrofit instance and implemented
+// wrapRetrofitExceptions() method
+
+open class BaseRetrofitSource(
     retrofitConfig: RetrofitConfig
 ) {
 
