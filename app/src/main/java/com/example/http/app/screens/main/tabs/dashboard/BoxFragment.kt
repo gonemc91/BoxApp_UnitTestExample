@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeEvent
+import com.example.http.app.utils.viewModelCreator
 import com.example.http.app.views.DashboardItemView
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentBoxBinding
@@ -15,7 +16,7 @@ class BoxFragment: BaseFragment(R.layout.fragment_box) {
 
     private lateinit var binding: FragmentBoxBinding
 
-    override val viewModel by viewModels<BoxViewModel> ()
+    override val viewModel by viewModelCreator { BoxViewModel(getBoxId()) }
 
     private val args by navArgs<BoxFragmentArgs>()
 
