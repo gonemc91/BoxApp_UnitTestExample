@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.example.nav_components_2_tabs_exercise'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.nav_components_2_tabs_exercise"

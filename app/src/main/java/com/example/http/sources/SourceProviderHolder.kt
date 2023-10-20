@@ -1,17 +1,36 @@
 package com.example.http.sources
 
+import com.example.http.app.Const
 import com.example.http.app.Singletons
 import com.example.http.app.model.SourcesProvider
 import com.example.http.app.model.settings.AppSettings
+import com.example.http.sources.base.RetrofitConfig
+import com.example.http.sources.base.RetrofitSourcesProvider
+import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 object SourceProviderHolder {
 
     val sourcesProvider: SourcesProvider by lazy<SourcesProvider> {
-        TODO("#10: Create Moshi instance, Retrofit instance, then create"+
-        "RetrofitConfig instance and use it for creating RetrofitSourcesProvider")
+        val moshi = Moshi.Builder().build()
+        val config = RetrofitConfig(
+            retrofit = createRetrofit(moshi),
+            moshi=moshi
+        )
+        RetrofitSourcesProvider(config)
+
+    }
+
+    private fun createRetrofit(moshi: Moshi): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(Const.BASE_URL)
+            .client(createOkHttpClient())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
     }
 
     /**

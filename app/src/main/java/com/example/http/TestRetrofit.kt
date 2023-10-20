@@ -10,19 +10,19 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 
-data class SignInRequestBody( //data class for Request
+data class SignInRequestBodyTest( //data class for Request
     val email: String,
     val password: String
 )
 
-data class SignInResponseBody( //data class for Response
+data class SignInResponseBodyTest( //data class for Response
     val token:String
 )
 
 interface Api{
     //Retrofit Function
     @POST("sign-in") //annotation POST
-    suspend fun signIn(@Body body: SignInRequestBody): SignInResponseBody //annotation Body suspend request
+    suspend fun signIn(@Body body: SignInRequestBodyTest): SignInResponseBodyTest //annotation Body suspend request
 }
 
 
@@ -52,7 +52,7 @@ val moshi = Moshi.Builder().build()
     //using
     val api = retrofit.create(Api::class.java)  //realization interface Api with instruction for task (sign-in)
 
-    val requestBody = SignInRequestBody( //init request
+    val requestBody = SignInRequestBodyTest( //init request
         email = "admin@google.com",
         password = "123"
     )

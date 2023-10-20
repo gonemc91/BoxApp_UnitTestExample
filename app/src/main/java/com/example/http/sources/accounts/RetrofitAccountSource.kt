@@ -3,6 +3,9 @@ package com.example.http.sources.accounts
 import com.example.http.app.model.accounts.AccountsSources
 import com.example.http.app.model.accounts.entities.Account
 import com.example.http.app.model.accounts.entities.SignUpData
+import com.example.http.sources.accounts.entities.SignInRequestEntity
+import com.example.http.sources.accounts.entities.SignUpRequestEntity
+import com.example.http.sources.accounts.entities.UpdateUsernameRequestEntity
 import com.example.http.sources.base.BaseRetrofitSource
 import com.example.http.sources.base.RetrofitConfig
 import kotlinx.coroutines.delay
@@ -18,27 +21,44 @@ import kotlinx.coroutines.delay
 class RetrofitAccountSource (
     config: RetrofitConfig
 ): BaseRetrofitSource(config), AccountsSources{
+
+
+    private val accountsApi =
+        retrofit.create(AccountsApi:: class.java)
     override suspend fun signIn(
         email: String,
         password: String)
-    : String {
+    : String = wrapRetrofitExceptions {
         delay(1000)
-        TODO("Not yet implemented")
+        val signInRequestEntity = SignInRequestEntity(
+            email=email,
+            password=password
+        )
+        accountsApi.signIn(signInRequestEntity).token
     }
 
     override suspend fun signUp(
-        signUpData: SignUpData) {
+        signUpData: SignUpData) = wrapRetrofitExceptions {
         delay(1000)
-        TODO("Not yet implemented")
+        val signUpRequestEntity = SignUpRequestEntity(
+            email = signUpData.email,
+            username = signUpData.username,
+            password = signUpData.password
+        )
+        accountsApi.signUp(signUpRequestEntity)
     }
 
-    override suspend fun getAccount(): Account {
+    override suspend fun getAccount(): Account = wrapRetrofitExceptions{
         delay(1000)
-        TODO("Not yet implemented")
+        accountsApi.getAccount().toAccount()
     }
 
-    override suspend fun setUsername(username: String) {
+    override suspend fun setUsername(username: String) = wrapRetrofitExceptions {
         delay(1000)
-        TODO("Not yet implemented")
+        val updateUsernameRequestEntity = UpdateUsernameRequestEntity(
+            username=username
+        )
+        accountsApi.setUsername(updateUsernameRequestEntity)
+
     }
 }
