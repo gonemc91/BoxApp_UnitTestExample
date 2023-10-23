@@ -18,7 +18,7 @@
        <!-- usesCleartextTraffic for working with http protocol-->
 
         <activity
-            android:name = "com.example.http.app.SplashActivity"
+            android:name = "com.example.http.app.screens.splash.SplashActivity"
             android:theme="@style/SplashActivity"
             android:exported="true">
             <intent-filter>

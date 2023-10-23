@@ -7,6 +7,7 @@ import com.example.http.app.model.accounts.AccountsRepository
 import com.example.http.app.utils.MutableLiveEvent
 import com.example.http.app.utils.publishEvent
 import com.example.http.app.utils.share
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -23,6 +24,7 @@ class SplashViewModel(
 
     init {
         viewModelScope.launch {
+            delay(2000)
             _launchMainScreenEvent.publishEvent(accountsRepository.isSignedIn())
         }
     }

@@ -1,7 +1,8 @@
-package com.example.http.app
+package com.example.http.app.screens.splash
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.http.app.Singletons
 import com.example.nav_components_2_tabs_exercise.R
 
 /**

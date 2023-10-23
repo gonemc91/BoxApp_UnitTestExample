@@ -64,4 +64,5 @@
     <string name="internal_error">Internal error</string>
     <string name="auth_error">Auth error</string>
     <string name="action_try_again">Try again</string>
+    <string name="issignedin">isSignedIn</string>
 </resources>

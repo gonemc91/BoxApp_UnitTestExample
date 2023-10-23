@@ -6,13 +6,14 @@
     android:orientation="vertical"
     android:gravity="bottom|center_horizontal"
     tools:background="@drawable/splash"
-    tools:context="com.example.http.app.SplashActivity">
+    tools:context="com.example.http.app.screens.splash.SplashActivity">
 
     <ProgressBar
         android:id="@+id/loadingIndicator"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:indeterminateTint="@color/white" />
+        android:indeterminateTint="@color/white"
+        />
 
     <TextView
         android:id="@+id/pleaseWaitTextView"

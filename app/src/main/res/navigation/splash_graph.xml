@@ -9,7 +9,9 @@
         android:id="@+id/splashFragment"
         android:name="com.example.http.app.screens.splash.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" />
+        tools:layout="@layout/fragment_splash" >
+
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.http.app.screens.main.MainActivity"
