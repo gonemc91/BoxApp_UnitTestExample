@@ -1,22 +1,28 @@
 package com.example.http.app.model.boxes
 
 import com.example.http.app.Empty
-import com.example.http.app.model.*
-import com.example.http.app.model.accounts.AccountsRepository
-import com.example.http.app.model.accounts.entities.Account
-import com.example.http.app.model.boxes.entities.BoxAndSettings
-import com.example.http.app.model.boxes.entities.BoxesFilter
-import com.example.http.app.utils.async.LazyFlowSubject
+import com.example.http.app.Error
 import com.example.http.app.Result
 import com.example.http.app.Success
-import com.example.http.app.Error
+import com.example.http.app.model.AuthException
+import com.example.http.app.model.BackendException
+import com.example.http.app.model.ConnectionException
+import com.example.http.app.model.accounts.AccountsRepository
+import com.example.http.app.model.accounts.entities.Account
 import com.example.http.app.model.boxes.entities.Box
+import com.example.http.app.model.boxes.entities.BoxAndSettings
+import com.example.http.app.model.boxes.entities.BoxesFilter
+import com.example.http.app.model.wrapBackendExceptions
+import com.example.http.app.utils.async.LazyFlowSubject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class BoxesRepository(
+@Singleton
+class BoxesRepository @Inject constructor(
     private val accountsRepository: AccountsRepository,
     private val boxesSource: BoxesSource
 ) {

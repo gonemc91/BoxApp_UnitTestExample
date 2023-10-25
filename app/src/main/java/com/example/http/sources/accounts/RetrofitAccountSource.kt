@@ -9,6 +9,8 @@ import com.example.http.sources.accounts.entities.UpdateUsernameRequestEntity
 import com.example.http.sources.base.BaseRetrofitSource
 import com.example.http.sources.base.RetrofitConfig
 import kotlinx.coroutines.delay
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 //todo #7: implement AccountSource methods:
@@ -17,8 +19,8 @@ import kotlinx.coroutines.delay
 //       -getAccount -> should call 'GET/me' and return account data
 //       -setUsername -> should call 'PUT/me'
 
-
-class RetrofitAccountSource (
+@Singleton
+class RetrofitAccountSource @Inject constructor(
     config: RetrofitConfig
 ): BaseRetrofitSource(config), AccountsSources{
 

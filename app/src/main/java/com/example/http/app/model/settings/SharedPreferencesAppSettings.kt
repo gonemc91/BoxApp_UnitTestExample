@@ -1,11 +1,17 @@
 package com.example.http.app.model.settings
 
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
+
 /**
  * Implementation of [AppSettings] based on [SharedPreferences].
+ *
  */
-class SharedPreferencesAppSettings(
-    appContext: Context
+@Singleton//singleton scope hilt var 2
+class SharedPreferencesAppSettings @Inject constructor (//"annotation" dependencies come through the constructor
+    @ApplicationContext appContext: Context // inform that need use appContext (qualifier)
 ): AppSettings {
 
     private val sharedPreferences = appContext.getSharedPreferences("settings", Context.MODE_PRIVATE)

@@ -7,9 +7,12 @@ import com.example.http.sources.base.BaseRetrofitSource
 import com.example.http.sources.base.RetrofitConfig
 import com.example.http.sources.boxes.entities.UpdateBoxRequestEntity
 import kotlinx.coroutines.delay
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
-class RetrofitBoxesSources(
+@Singleton
+class RetrofitBoxesSources @Inject constructor(
     config: RetrofitConfig
 ): BaseRetrofitSource(config), BoxesSource {
 

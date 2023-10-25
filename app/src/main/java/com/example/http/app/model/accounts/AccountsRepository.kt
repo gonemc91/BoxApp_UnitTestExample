@@ -7,8 +7,11 @@ import com.example.http.app.model.accounts.entities.SignUpData
 import com.example.http.app.model.settings.AppSettings
 import com.example.http.app.utils.async.LazyFlowSubject
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AccountsRepository(
+@Singleton
+class AccountsRepository @Inject constructor(
     private val accountSource: AccountsSources,
     private val appSettings: AppSettings
 ) {
@@ -122,7 +125,7 @@ class AccountsRepository(
         try{
             accountSource.getAccount()
         }catch (e: BackendException){
-            // account has been delted = session expired = AuthException
+            // account has been deleted = session expired = AuthException
             if (e.code == 404) throw AuthException(e)
             else throw e
         }

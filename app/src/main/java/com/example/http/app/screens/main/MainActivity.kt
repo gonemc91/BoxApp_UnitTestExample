@@ -1,6 +1,7 @@
 package com.example.http.app.screens.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,14 +12,20 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.http.app.Singletons
+import com.example.http.app.model.accounts.AccountsRepository
+import com.example.http.app.model.boxes.BoxesRepository
 import com.example.http.app.screens.main.tabs.TabsFragment
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
+import javax.inject.Inject
 
 /**
  * Container for all screens in the app.
  */
+
+@AndroidEntryPoint // "annotation" instruction hilt for need inject dependencies
 class MainActivity : AppCompatActivity() {
 
     // view-model is used for observing username to be displayed in the toolbar
@@ -28,6 +35,12 @@ class MainActivity : AppCompatActivity() {
     private var navController: NavController? = null
 
     private val topLevelDestinations = setOf(getTabsDestination(), getSignInDestination())
+
+    @Inject lateinit var accountRepository1: AccountsRepository// "annotation" dependencies come through the field property
+    @Inject lateinit var accountRepository2: AccountsRepository
+    @Inject lateinit var boxesRepository1: BoxesRepository// "annotation" dependencies come through the field property
+    @Inject lateinit var boxesRepository2: BoxesRepository
+
 
     // fragment listener is sued for tracking current nav controller
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
@@ -41,6 +54,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Singletons.init(applicationContext)
         super.onCreate(savedInstanceState)
+
+        Log.d("AAAAA", "accountRepository1: $accountRepository1")
+        Log.d("AAAAA", "accountRepository2: $accountRepository2")
+        Log.d("AAAAA", "boxesRepository1: $boxesRepository1")
+        Log.d("AAAAA", "boxesRepository2: $boxesRepository2")
+
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setSupportActionBar(binding.toolbar)
 
