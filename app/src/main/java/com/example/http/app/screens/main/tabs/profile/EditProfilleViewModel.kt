@@ -2,23 +2,26 @@ package com.example.http.app.screens.main.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.http.app.Singletons
 import com.example.http.app.Success
 import com.example.http.app.model.EmptyFieldException
 import com.example.http.app.model.accounts.AccountsRepository
 import com.example.http.app.screens.base.BaseViewModel
-import com.example.http.app.utils.*
-import com.example.http.app.utils.logger.LogCatLogger
+import com.example.http.app.utils.MutableLiveEvent
+import com.example.http.app.utils.MutableUnitLiveEvent
 import com.example.http.app.utils.logger.Logger
+import com.example.http.app.utils.publishEvent
+import com.example.http.app.utils.share
 import com.example.nav_components_2_tabs_exercise.R
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class EditProfileViewModel(
-    accountsRepository: AccountsRepository = Singletons.accountsRepository,
-    logger: Logger = LogCatLogger) : BaseViewModel(accountsRepository, logger) {
+@HiltViewModel
+class EditProfileViewModel @Inject constructor(
+    accountsRepository: AccountsRepository,
+    logger: Logger) : BaseViewModel(accountsRepository, logger) {
 
     private val _initialUsernameEvent = MutableLiveEvent<String>()
     val initialUsernameEvent = _initialUsernameEvent.share()

@@ -2,8 +2,8 @@ package com.example.http.app.screens.splash
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.http.app.Singletons
 import com.example.nav_components_2_tabs_exercise.R
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Entry point of the app.
@@ -12,11 +12,11 @@ import com.example.nav_components_2_tabs_exercise.R
  * [SplashFrgment] and [SplashViewModel].
  *
  */
-
+@AndroidEntryPoint
 class SplashActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Singletons.init(applicationContext)
+        //Singletons.init(applicationContext)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
     }

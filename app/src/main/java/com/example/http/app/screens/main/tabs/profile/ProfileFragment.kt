@@ -11,9 +11,11 @@ import com.example.http.app.utils.findTopNavController
 import com.example.http.app.utils.observeResults
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
+@AndroidEntryPoint
 class ProfileFragment() : BaseFragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding

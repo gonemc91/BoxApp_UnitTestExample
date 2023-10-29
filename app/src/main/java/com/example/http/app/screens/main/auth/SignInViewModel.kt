@@ -2,23 +2,24 @@ package com.example.http.app.screens.main.auth
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.http.app.Singletons
 import com.example.http.app.model.AuthException
 import com.example.http.app.model.EmptyFieldException
 import com.example.http.app.model.Field
 import com.example.http.app.model.accounts.AccountsRepository
 import com.example.http.app.screens.base.BaseViewModel
 import com.example.http.app.utils.MutableUnitLiveEvent
-import com.example.http.app.utils.logger.LogCatLogger
 import com.example.http.app.utils.logger.Logger
 import com.example.http.app.utils.publishEvent
 import com.example.http.app.utils.requireValue
 import com.example.http.app.utils.share
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignInViewModel(
-    accountsRepository: AccountsRepository = Singletons.accountsRepository,
-    logger: Logger = LogCatLogger
+@HiltViewModel
+class SignInViewModel @Inject constructor(
+    accountsRepository: AccountsRepository,
+    logger: Logger
 ) : BaseViewModel(accountsRepository,logger) {
 
     private val _state = MutableLiveData(State())

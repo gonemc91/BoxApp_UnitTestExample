@@ -8,7 +8,9 @@ import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeResults
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentSettingsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsFragment: BaseFragment(R.layout.fragment_settings) {
 
     private lateinit var binding: FragmentSettingsBinding

@@ -2,7 +2,6 @@ package com.example.http.app.screens.main.tabs.dashboard
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.http.app.screens.base.BaseFragment
@@ -11,12 +10,19 @@ import com.example.http.app.utils.viewModelCreator
 import com.example.http.app.views.DashboardItemView
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentBoxBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class BoxFragment: BaseFragment(R.layout.fragment_box) {
+
+    @Inject lateinit var factory: BoxViewModel.Factory
 
     private lateinit var binding: FragmentBoxBinding
 
-    override val viewModel by viewModelCreator { BoxViewModel(getBoxId()) }
+    override val viewModel by viewModelCreator {
+        factory.create(args.boxID)
+    }
 
     private val args by navArgs<BoxFragmentArgs>()
 

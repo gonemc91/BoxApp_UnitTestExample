@@ -10,8 +10,10 @@ import com.example.http.app.screens.main.MainActivityArgs
 import com.example.http.app.utils.observeEvent
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentSplashBinding
-import kotlinx.coroutines.delay
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class SplashFragment: Fragment(R.layout.fragment_splash) {
     private lateinit var binding: FragmentSplashBinding
 

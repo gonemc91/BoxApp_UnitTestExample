@@ -7,11 +7,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.http.app.model.boxes.entities.Box
 import com.example.http.app.screens.base.BaseFragment
+import com.example.http.app.utils.observeResults
 import com.example.http.app.views.DashboardItemView
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentDashboardBinding
-import com.example.http.app.utils.observeResults
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
 
     override val viewModel by viewModels<DashboardViewModel>()

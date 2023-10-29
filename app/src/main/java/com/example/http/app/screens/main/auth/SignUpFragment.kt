@@ -13,7 +13,9 @@ import com.example.http.app.utils.observeEvent
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentSignUpBinding
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment: BaseFragment(R.layout.fragment_sign_up) {
 
     private lateinit var binding: FragmentSignUpBinding

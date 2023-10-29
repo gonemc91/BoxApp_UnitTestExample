@@ -9,7 +9,9 @@ import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeEvent
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentSignInBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private lateinit var binding: FragmentSignInBinding

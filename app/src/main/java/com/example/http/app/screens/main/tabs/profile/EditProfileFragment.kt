@@ -9,8 +9,9 @@ import com.example.http.app.screens.base.BaseFragment
 import com.example.http.app.utils.observeEvent
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentEditProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding

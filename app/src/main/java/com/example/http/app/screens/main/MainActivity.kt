@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.example.http.app.Singletons
 import com.example.http.app.model.accounts.AccountsRepository
 import com.example.http.app.model.boxes.BoxesRepository
 import com.example.http.app.screens.main.tabs.TabsFragment
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Singletons.init(applicationContext)
+        //Singletons.init(applicationContext)
         super.onCreate(savedInstanceState)
 
         Log.d("AAAAA", "accountRepository1: $accountRepository1")
