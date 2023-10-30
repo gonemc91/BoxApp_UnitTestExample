@@ -16,7 +16,7 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-
+//Use only Dagger, because need add one parameter.
 class BoxViewModel @AssistedInject constructor(
     @Assisted boxId: Long,
     private val boxesRepository: BoxesRepository,
@@ -37,6 +37,7 @@ class BoxViewModel @AssistedInject constructor(
                 }
         }
     }
+    // Interface for create parameter boxId. Invoke in Fragment.
 
     @AssistedFactory
     interface Factory{

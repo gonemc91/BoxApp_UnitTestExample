@@ -16,7 +16,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class BoxFragment: BaseFragment(R.layout.fragment_box) {
 
-    @Inject lateinit var factory: BoxViewModel.Factory
+    @Inject lateinit var factory: BoxViewModel.Factory //inject factory for create parameter boxId for ViewModel
 
     private lateinit var binding: FragmentBoxBinding
 
