@@ -14,12 +14,12 @@
         android:theme="@style/Theme.NavComponents2tabsexercise"
         tools:targetApi="31"
         android:usesCleartextTraffic="true"
-        android:name="com.example.http.app.App"
+        android:name="com.example.http.App"
         >
        <!-- usesCleartextTraffic for working with http protocol-->
 
         <activity
-            android:name = "com.example.http.app.screens.splash.SplashActivity"
+            android:name = "com.example.http.SplashActivity"
             android:theme="@style/SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.http.app.screens.main.MainActivity"/>
+        <activity android:name="com.example.http.presentation.main.MainActivity"/>
 
     </application>
 

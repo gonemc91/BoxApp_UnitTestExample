@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context="com.example.http.app.screens.main.tabs.profile.ProfileFragment">
+    tools:context="com.example.http.presentation.main.tabs.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -102,7 +102,7 @@
 
         <Button
             android:id="@+id/logoutButton"
-            style="@style/GlobalTextInputStyle.Secondary.Big"
+            style="@style/GlobalTextInputStyle.Big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_space"
@@ -112,7 +112,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/action_logout"/>
 
-        <com.example.http.app.views.ResultView
+        <com.example.http.views.ResultView
             android:id="@+id/resultView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

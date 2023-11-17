@@ -1,9 +1,9 @@
 package com.example.http.di
 
-import com.example.http.app.model.accounts.AccountsSources
-import com.example.http.app.model.boxes.BoxesSource
-import com.example.http.sources.accounts.RetrofitAccountSource
-import com.example.http.sources.boxes.RetrofitBoxesSources
+import com.example.http.domain.accounts.AccountsSources
+import com.example.http.domain.boxes.BoxesSource
+import com.example.http.data.accounts.RetrofitAccountSource
+import com.example.http.data.boxes.RetrofitBoxesSources
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

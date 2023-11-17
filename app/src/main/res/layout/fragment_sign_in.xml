@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context="com.example.http.app.screens.main.auth.SignInFragment">
+    tools:context="com.example.http.presentation.main.auth.SignInFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -68,7 +68,7 @@
 
         <Button
             android:id="@+id/signUpButton"
-            style="@style/GlobalTextInputStyle.Secondary.Big"
+            style="@style/GlobalTextInputStyle.Big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"

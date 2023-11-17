@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.http.app.screens.main.tabs.dashboard.DashboardFragment">
+    tools:context="com.example.http.presentation.main.tabs.dashboard.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/boxesContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/splash"
+        >
 
 
         <androidx.constraintlayout.helper.widget.Flow
@@ -28,13 +30,13 @@
             app:constraint_referenced_ids="greenBox,yellowBox"
             />
 
-        <com.example.http.app.views.DashboardItemView
+        <com.example.http.views.DashboardItemView
             android:id="@+id/greenBox"
             style="@style/DefaultDashboardItemStyle"
             app:color="#008800"
             app:title="Green Box" />
 
-        <com.example.http.app.views.DashboardItemView
+        <com.example.http.views.DashboardItemView
             android:id="@+id/yellowBox"
             style="@style/DefaultDashboardItemStyle"
             app:color="#888800"
@@ -53,7 +55,7 @@
         android:text="@string/no_boxes"
         android:visibility="gone"/>
 
-    <com.example.http.app.views.ResultView
+    <com.example.http.views.ResultView
         android:id="@+id/resultView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

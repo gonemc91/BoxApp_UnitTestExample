@@ -1,7 +1,7 @@
 package com.example.http.di
 
-import com.example.http.app.Const
-import com.example.http.app.model.settings.AppSettings
+import com.example.http.Const
+import com.example.http.domain.settings.AppSettings
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

@@ -1,7 +1,7 @@
 package com.example.http.di
 
-import com.example.http.app.utils.logger.LogCatLogger
-import com.example.http.app.utils.logger.Logger
+import com.example.http.utils.logger.LogCatLogger
+import com.example.http.utils.logger.Logger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

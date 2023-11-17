@@ -6,14 +6,13 @@
     android:orientation="vertical"
     android:gravity="bottom|center_horizontal"
     tools:background="@drawable/splash"
-    tools:context="com.example.http.app.screens.splash.SplashActivity">
+    tools:context="com.example.http.SplashActivity">
 
     <ProgressBar
         android:id="@+id/loadingIndicator"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:indeterminateTint="@color/white"
-        />
+        android:indeterminateTint="@color/cardview_shadow_start_color" />
 
     <TextView
         android:id="@+id/pleaseWaitTextView"
@@ -21,11 +20,11 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:fontFamily="casual"
+        android:textAllCaps="true"
         android:gravity="center"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="8dp"
-        android:textColor="@color/white"
+        android:textColor="@color/defaultDashboardColor"
         android:text="@string/please_wait"/>
 
 </LinearLayout>

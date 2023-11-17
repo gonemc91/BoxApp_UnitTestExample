@@ -1,7 +1,7 @@
 package com.example.http.di
 
-import com.example.http.app.model.settings.AppSettings
-import com.example.http.app.model.settings.SharedPreferencesAppSettings
+import com.example.http.domain.settings.AppSettings
+import com.example.http.data.settings.SharedPreferencesAppSettings
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
