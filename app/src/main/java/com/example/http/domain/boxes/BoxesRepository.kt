@@ -13,22 +13,25 @@ import com.example.http.domain.boxes.entities.Box
 import com.example.http.domain.boxes.entities.BoxAndSettings
 import com.example.http.domain.boxes.entities.BoxesFilter
 import com.example.http.domain.wrapBackendExceptions
+import com.example.http.utils.async.LazyFlowFactory
 import com.example.http.utils.async.LazyFlowSubject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 import javax.inject.Singleton
-
+@ExperimentalCoroutinesApi
 @Singleton
 class BoxesRepository @Inject constructor(
     private val accountsRepository: AccountsRepository,
-    private val boxesSource: BoxesSource
+    private val boxesSource: BoxesSource,
+    lazyFlowFactory: LazyFlowFactory
 ) {
     private var accountResult: Result<Account> = Empty()
 
-    private val boxesLazyFlowSubject = LazyFlowSubject<BoxesFilter, List<BoxAndSettings>>{ filter->
+    private val boxesLazyFlowSubject: LazyFlowSubject<BoxesFilter, List<BoxAndSettings>> = lazyFlowFactory.createLazyFlowSubject{ filter->
         wrapBackendExceptions { boxesSource.getBoxes(filter) }
     }
 

@@ -5,7 +5,7 @@ import com.example.http.data.accounts.entities.SignUpRequestEntity
 import com.example.http.data.accounts.entities.UpdateUsernameRequestEntity
 import com.example.http.data.base.BaseRetrofitSource
 import com.example.http.data.base.RetrofitConfig
-import com.example.http.domain.accounts.AccountsSources
+import com.example.http.domain.accounts.AccountsSource
 import com.example.http.domain.accounts.entities.Account
 import com.example.http.domain.accounts.entities.SignUpData
 import kotlinx.coroutines.delay
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 @Singleton
 class RetrofitAccountSource @Inject constructor(
     config: RetrofitConfig
-): BaseRetrofitSource(config), AccountsSources {
+): BaseRetrofitSource(config), AccountsSource {
 
 
     private val accountsApi = retrofit.create(AccountsApi:: class.java)

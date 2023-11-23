@@ -17,10 +17,11 @@ typealias SuspendValueLoader<A, T> = suspend (A) -> T?
  */
 
 class LazyFlowSubject<A: Any, T : Any>(
+    lazyListenerFactory: LazyListenerFactory,
     private val loader: SuspendValueLoader<A, T>
 ) {
 
-    private val lazyListenerSubject = LazyListenerSubject<A, T> {arg->
+    private val lazyListenerSubject = lazyListenerFactory.createdLazyListenerSubject<A, T> {arg->
         runBlocking {
             loader.invoke(arg)
         }

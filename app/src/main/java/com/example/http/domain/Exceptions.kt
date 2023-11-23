@@ -38,7 +38,7 @@ class ParseBackendResponseException(
 ) : AppException(cause = cause)
 
 // ---
-internal inline fun <T> wrapBackendExceptions(block: () -> T): T {
+internal suspend fun <T> wrapBackendExceptions(block: suspend () -> T): T {
     try {
         return block.invoke()
     } catch (e: BackendException) {

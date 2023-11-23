@@ -5,7 +5,7 @@ import com.example.http.domain.accounts.entities.Account
 import com.example.http.domain.accounts.entities.SignUpData
 
 
-interface AccountsSources {
+interface AccountsSource {
 
      /**
       * Execute sign-in request.

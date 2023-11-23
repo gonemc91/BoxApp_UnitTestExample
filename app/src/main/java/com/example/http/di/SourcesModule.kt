@@ -1,6 +1,6 @@
 package com.example.http.di
 
-import com.example.http.domain.accounts.AccountsSources
+import com.example.http.domain.accounts.AccountsSource
 import com.example.http.domain.boxes.BoxesSource
 import com.example.http.data.accounts.RetrofitAccountSource
 import com.example.http.data.boxes.RetrofitBoxesSources
@@ -16,7 +16,7 @@ abstract class SourcesModule {
 @Binds
 abstract fun bindAccountSource(
     retrofitAccountSource: RetrofitAccountSource
-): AccountsSources
+): AccountsSource
 
 @Binds
 abstract fun  bindBoxesSource(

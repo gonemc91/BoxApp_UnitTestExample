@@ -1,28 +1,31 @@
 package com.example.http.domain.accounts
 
-import com.example.http.domain.Result
 import com.example.http.data.*
-import com.example.http.domain.accounts.entities.Account
-import com.example.http.domain.accounts.entities.SignUpData
-import com.example.http.domain.settings.AppSettings
-import com.example.http.utils.async.LazyFlowSubject
 import com.example.http.domain.AccountAlreadyExistsException
 import com.example.http.domain.AuthException
 import com.example.http.domain.BackendException
 import com.example.http.domain.EmptyFieldException
 import com.example.http.domain.Field
 import com.example.http.domain.InvalidCredentialsException
+import com.example.http.domain.Result
+import com.example.http.domain.accounts.entities.Account
+import com.example.http.domain.accounts.entities.SignUpData
+import com.example.http.domain.settings.AppSettings
 import com.example.http.domain.wrapBackendExceptions
+import com.example.http.utils.async.LazyFlowFactory
+import com.example.http.utils.async.LazyFlowSubject
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AccountsRepository @Inject constructor(
-    private val accountSource: AccountsSources,
-    private val appSettings: AppSettings
+    private val accountSource: AccountsSource,
+    private val appSettings: AppSettings,
+    lazyFlowFactory: LazyFlowFactory
 ) {
-    private val accountLazyFlowSubject = LazyFlowSubject<Unit, Account>{
+    private val accountLazyFlowSubject: LazyFlowSubject<Unit, Account> =
+        lazyFlowFactory.createLazyFlowSubject {
         doGetAccount()
     }
 
