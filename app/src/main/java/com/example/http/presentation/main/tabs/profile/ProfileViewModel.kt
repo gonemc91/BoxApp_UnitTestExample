@@ -9,7 +9,6 @@ import com.example.http.presentation.base.BaseViewModel
 import com.example.http.utils.logger.Logger
 import com.example.http.utils.share
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +22,7 @@ class ProfileViewModel @Inject constructor(
 
 
     init {
-        viewModelScope.launch {
+        viewModelScope.safeLaunch {
             accountRepository.getAccount().collect {
                 _account.value = it
             }

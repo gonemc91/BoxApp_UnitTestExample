@@ -47,8 +47,6 @@ open class BaseViewModel(
                 logError(e)
                 _showErrorMessageResEvent.publishEvent(R.string.internal_error)
             }
-
-
         }
     }
 
@@ -58,6 +56,10 @@ open class BaseViewModel(
 
     fun logout(){
         accountsRepository.logout()
+    }
+
+    protected fun showErrorMessage(messageRes: Int){
+        _showErrorMessageResEvent.publishEvent(messageRes)
     }
 
 

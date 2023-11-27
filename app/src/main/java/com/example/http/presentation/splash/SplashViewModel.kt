@@ -7,7 +7,6 @@ import com.example.http.utils.MutableLiveEvent
 import com.example.http.utils.publishEvent
 import com.example.http.utils.share
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +25,6 @@ class SplashViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            delay(2000)
             _launchMainScreenEvent.publishEvent(accountsRepository.isSignedIn())
         }
     }

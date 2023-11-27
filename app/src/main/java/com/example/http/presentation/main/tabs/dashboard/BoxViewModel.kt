@@ -30,10 +30,10 @@ class BoxViewModel @AssistedInject constructor(
 
     init {
         viewModelScope.launch {
-            boxesRepository.getBoxesAndSettings(BoxesFilter.ONLY_ACTIVE)
-                .map { res -> res.map { boxes -> boxes.firstOrNull { it.box.id == boxId } } }
-                .collect { res ->
-                    _shouldExitEvent.publishEvent(res is Success && res.value == null)
+           boxesRepository.getBoxesAndSettings(BoxesFilter.ONLY_ACTIVE)
+                .map { result -> result.map { boxes -> boxes.firstOrNull { it.box.id == boxId } } }
+                .collect { result ->
+                    _shouldExitEvent.publishEvent(result is Success && result.value == null)
                 }
         }
     }

@@ -2,20 +2,19 @@ package com.example.http.presentation.main.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.http.utils.logger.Logger
 import com.example.http.domain.EmptyFieldException
 import com.example.http.domain.Success
 import com.example.http.domain.accounts.AccountsRepository
 import com.example.http.presentation.base.BaseViewModel
 import com.example.http.utils.MutableLiveEvent
 import com.example.http.utils.MutableUnitLiveEvent
+import com.example.http.utils.logger.Logger
 import com.example.http.utils.publishEvent
 import com.example.http.utils.share
 import com.example.nav_components_2_tabs_exercise.R
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,14 +32,12 @@ class EditProfileViewModel @Inject constructor(
     private val _goBackEvent = MutableUnitLiveEvent()
     val goBackEvent = _goBackEvent.share()
 
-    private val _showErrorEvent = MutableLiveEvent<Int>()
-    val showErrorEvent = _showErrorEvent.share()
-
     init {
-
-        viewModelScope.launch {
+        viewModelScope.safeLaunch {
             val res = accountsRepository.getAccount()
-                .filterNotNull()
+                //discarding all State except Success and Error
+                .filter { it.isFinished() }
+                //get first value
                 .first()
            if (res is Success)_initialUsernameEvent.publishEvent(res.value.username)
         }
@@ -52,7 +49,7 @@ class EditProfileViewModel @Inject constructor(
                 accountsRepository.updateAccountUsername(newUsername)
                 goBack()
             } catch (e: EmptyFieldException) {
-                showEmptyFieldErrorMessage()
+                showErrorMessage(R.string.field_is_empty)
             }finally {
                 hideProgress()
             }
@@ -69,7 +66,6 @@ class EditProfileViewModel @Inject constructor(
         _saveInProgress.value = false
     }
 
-    private fun showEmptyFieldErrorMessage() = _showErrorEvent.publishEvent(R.string.field_is_empty)
 
 
 }

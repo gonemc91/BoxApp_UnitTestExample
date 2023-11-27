@@ -3,7 +3,6 @@ package com.example.http.presentation.main.auth
 import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.http.utils.logger.Logger
 import com.example.http.domain.AccountAlreadyExistsException
 import com.example.http.domain.EmptyFieldException
 import com.example.http.domain.Field
@@ -13,12 +12,12 @@ import com.example.http.domain.accounts.entities.SignUpData
 import com.example.http.presentation.base.BaseViewModel
 import com.example.http.utils.MutableLiveEvent
 import com.example.http.utils.MutableUnitLiveEvent
+import com.example.http.utils.logger.Logger
 import com.example.http.utils.publishEvent
 import com.example.http.utils.requireValue
 import com.example.http.utils.share
 import com.example.nav_components_2_tabs_exercise.R
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -31,18 +30,14 @@ class SignUpViewModel @Inject constructor(
     private val _goBackEvent = MutableUnitLiveEvent()
     val goBackEvent = _goBackEvent.share()
 
-
     private val _showToastEvent = MutableLiveEvent<Int>()
     val showToastEvent = _showToastEvent.share()
-
 
     private val _state = MutableLiveData(State())
     val state = _state.share()
 
-
     fun signUp(signUpData : SignUpData){
-        viewModelScope.launch {
-            viewModelScope.launch {
+            viewModelScope.safeLaunch {
                 showProgress()
                 try {
                     accountsRepository.signUp(signUpData)
@@ -58,11 +53,7 @@ class SignUpViewModel @Inject constructor(
                     hideProgress()
                 }
             }
-        }
     }
-
-
-
 
     private fun processEmptyFieldException(e: EmptyFieldException){
         _state.value = when(e.field){

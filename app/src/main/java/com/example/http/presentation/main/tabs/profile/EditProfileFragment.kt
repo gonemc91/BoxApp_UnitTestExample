@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.http.utils.observeEvent
 import com.example.http.presentation.base.BaseFragment
+import com.example.http.utils.observeEvent
 import com.example.nav_components_2_tabs_exercise.R
 import com.example.nav_components_2_tabs_exercise.databinding.FragmentEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +50,7 @@ class EditProfileFragment : BaseFragment(R.layout.fragment_edit_profile) {
         binding.usernameTextInput.setText(username)
     }
 
-    private fun observeEmptyFieldErrorEvent() = viewModel.showErrorEvent.observeEvent(viewLifecycleOwner) {
+    private fun observeEmptyFieldErrorEvent() = viewModel.showErrorMessageResEvent.observeEvent(viewLifecycleOwner) {
         Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
     }
 

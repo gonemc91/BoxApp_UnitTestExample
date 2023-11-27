@@ -60,9 +60,11 @@
     <string name="setting_is_active">Is Active</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="connection_error">Connection error</string>
-    <string name="internal_error">Internal error</string>
     <string name="auth_error">Auth error</string>
     <string name="action_try_again">Try again</string>
     <string name="issignedin">isSignedIn</string>
+
+   <!-- Unit Test Resource-->
+    <string name="connection_error">Can\'t connect to the server</string>
+    <string name="internal_error">Internal error! Please try again later.</string>
 </resources>

@@ -4,8 +4,12 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class Event<T> (
-    value: T){
+/**
+ * Container for any data.
+ * Call method "get" return data only once and later clearing data
+ * Uses in livedata, which in turn use in ViewModel
+ */
+class Event<T> (value: T){
 
     private var _value: T? = value
     fun get(): T? = _value.also { _value = null }

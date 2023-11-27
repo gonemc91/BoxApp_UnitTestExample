@@ -2,13 +2,13 @@ package com.example.http.presentation.main.tabs.dashboard
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.http.utils.logger.Logger
 import com.example.http.domain.Result
 import com.example.http.domain.accounts.AccountsRepository
 import com.example.http.domain.boxes.BoxesRepository
 import com.example.http.domain.boxes.entities.Box
 import com.example.http.domain.boxes.entities.BoxesFilter
 import com.example.http.presentation.base.BaseViewModel
+import com.example.http.utils.logger.Logger
 import com.example.http.utils.share
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,8 +26,12 @@ class DashboardViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            //Get data from Flow<Result<List<BoxAndSettings>>>
+            //method collect get us actuality Data from Flow
+            //map <BoxAndSetting> into <Box> and write in LiveData
             boxesRepository.getBoxesAndSettings(BoxesFilter.ONLY_ACTIVE).collect { result ->
-                _boxes.value = result.map { list -> list.map { it.box } }
+                _boxes.value = result.map { list ->
+                    list.map { it.box } }
             }
         }
     }
